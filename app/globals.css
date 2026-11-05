@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@source "../app";
+@source "../lib";
+
+@theme {
+  --color-forest: #0F2F2A;
+  --color-primary: #2F6F4E;
+  --color-leaf: #88B04B;
+  --color-cream: #F1F7ED;
+  --color-honey: #D9A441;
+}
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #0F2F2A;
+}
+
+body {
+  background-color: #FAFCF9;
+  color: #0F2F2A;
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Custom keyframe animations */
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(0.97); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2.5s infinite ease-in-out;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Interactive Card & Button Enhancements */
+.card-hover-effect {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-hover-effect:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(15, 47, 42, 0.08), 0 4px 10px -2px rgba(15, 47, 42, 0.04);
+}
+
+.btn-press-effect {
+  transition: all 0.15s ease-out;
+}
+.btn-press-effect:active {
+  transform: scale(0.98);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F7ED;
+}
+::-webkit-scrollbar-thumb {
+  background: #2F6F4E;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0F2F2A;
+}

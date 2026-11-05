@@ -1,0 +1,1816 @@
+﻿PROJECT REQUIREMENTS& SOFTWARE REQUIREMENTS SPECIFICATION
+বাংলাদেশভিত্তিক Multi-Vendor Social Commerce Marketplace
+Facebook Seller Product Import • Centralized Marketing • Seller FulfillmentBuyer, Seller, Admin & Authority Dashboard
+Document Information
+Details
+Document Type
+Product Requirements Document (PRD) + Software Requirements Specification (SRS)
+Project Type
+Multi-Vendor E-commerce / Social Commerce Marketplace
+Target Market
+Bangladesh
+Currency
+Bangladeshi Taka (BDT / ৳)
+Frontend
+Next.js App Router + TypeScript
+Backend
+Node.js + Express.js REST API
+Database
+MongoDB + Mongoose
+Business Model
+Percentage-based marketplace commission
+Fulfillment Model
+Seller-managed fulfillment
+Product Approval
+Manual approval by Authority/Admin
+Payment Methods
+Cash on Delivery (COD) + Online Payment
+Document Version
+1.0
+Status
+Initial project baseline — decisions requiring confirmation are marked
+Prepared as an implementation blueprint for a full-stack development project
+ডকুমেন্ট কন্ট্রোল ও ব্যবহারের নির্দেশনা
+এই ডকুমেন্টটি Marketplace-এর Business Requirements, Functional Requirements, Non-Functional Requirements, Technical Architecture, Database Design, API Scope, Security, SEO, Marketing, Testing এবং Release Plan এক জায়গায় সংরক্ষণ করার জন্য তৈরি করা হয়েছে। এটি Development Team, UI/UX Designer, Backend Developer, Frontend Developer, QA এবং Project Owner-এর reference document হিসেবে ব্যবহার করা যাবে।
+গুরুত্বপূর্ণ: এটি একটি detailed baseline specification। Payment gateway approval, Meta API permission, courier provider contract, legal/tax policy, seller payout timing এবং discount funding-এর মতো বিষয়গুলো বাস্তব ব্যবসায়িক চুক্তি ও কর্তৃপক্ষের নিয়ম অনুযায়ী final করতে হবে। যেসব সিদ্ধান্ত এখনো নির্ধারিত নয়, সেগুলোকে Configurable বা Open Decision হিসেবে চিহ্নিত করা হয়েছে।
+Version
+Date
+Description
+Owner
+1.0
+03 November 2026
+Initial detailed requirements baseline
+Project Owner
+1.1+
+To be decided
+Future change requests and approved revisions
+Project Owner / Product Owner
+সূচিপত্র
+1. Executive Summary ও Product Vision
+2. Business Goals, Scope ও Success Metrics
+3. User Roles ও Permission Model
+4. End-to-End Business Workflows
+5. Functional Requirements — Public Storefront
+6. Buyer Account & Dashboard
+7. Seller Portal & Store Management
+8. Product Management, Moderation ও Branding
+9. Facebook Page / Catalog Import
+10. Cart, Checkout, Order & Fulfillment
+11. Payment, Commission, Ledger & Payout
+12. Admin & Authority Console
+13. Marketing, Promotion ও Analytics
+14. SEO & Content Management
+15. Technical Architecture
+16. MongoDB Data Model & Index Strategy
+17. REST API Specification
+18. Security, Privacy ও Compliance
+19. Non-Functional Requirements
+20. Error Handling, Logging ও Observability
+21. Testing & Quality Assurance
+22. Deployment, DevOps ও Backup
+23. Delivery Roadmap & Milestones
+24. Risks, Dependencies ও Open Decisions
+25. Acceptance Criteria & Launch Checklist
+Appendix A–D: Examples, Statuses, Glossary, References
+1. Executive Summary ও Product Vision
+প্রস্তাবিত প্ল্যাটফর্মটি একটি বাংলাদেশভিত্তিক Multi-Vendor Social Commerce Marketplace। Facebook Page বা Social Media-তে যেসব ক্ষুদ্র ব্যবসায়ী ও উদ্যোক্তা পণ্য বিক্রি করেন কিন্তু নিজস্ব e-commerce website, payment workflow, SEO, order management বা digital marketing infrastructure নেই, তাদের পণ্য একটি কেন্দ্রীয় Marketplace-এ তালিকাভুক্ত করা হবে।
+Seller Marketplace-এ Store তৈরি করবে, নিজের পণ্য যোগ করবে অথবা অনুমোদিত Meta integration-এর মাধ্যমে accessible product catalog import করবে। প্রতিটি পণ্য Authority/Admin-এর manual review ও approval পেরিয়ে Public Storefront-এ প্রকাশিত হবে। Marketplace Operator platform marketing, SEO, campaigns, customer experience এবং platform governance পরিচালনা করবে। Seller নিজের পণ্য সংরক্ষণ, প্যাকেজিং ও delivery/fulfillment পরিচালনা করবে।
+1.1 Product Vision
+বাংলাদেশের Social Commerce Seller-দের জন্য এমন একটি trusted marketplace তৈরি করা, যেখানে তারা সহজে পণ্য তালিকাভুক্ত করতে পারে এবং Marketplace Operator-এর marketing, discovery, checkout ও order infrastructure ব্যবহার করে নতুন Buyer-এর কাছে পৌঁছাতে পারে।
+1.2 Core Value Proposition
+Seller-এর জন্য: নিজস্ব ওয়েবসাইট তৈরি না করেও অনলাইন বিক্রির সুযোগ, product dashboard, order management এবং marketplace marketing exposure।
+Buyer-এর জন্য: বিভিন্ন Seller-এর পণ্য এক জায়গায় দেখা, তুলনা, নিরাপদ checkout, COD/online payment এবং order tracking।
+Marketplace Operator-এর জন্য: প্রতিটি eligible sale থেকে commission revenue, campaign control, seller network এবং customer acquisition data।
+Authority/Operations-এর জন্য: product quality control, seller verification, complaint handling এবং audit trail।
+1.3 Business Model
+Area
+Decision / Baseline
+Revenue
+Completed/eligible sale-এর উপর percentage commission
+Seller fulfillment
+Seller product pack, dispatch ও delivery coordination করবে; courier model configurable
+Product publication
+Manual approval ছাড়া public listing নয়
+Payment
+COD এবং online payment
+Geography
+Bangladesh; BDT currency
+Seller acquisition
+Facebook/social sellers, small businesses, independent merchants
+Product sourcing
+Seller upload, approved Facebook catalog import, CSV/manual import
+Marketing
+Marketplace-owned SEO, ads, campaigns, featured placements
+2. Business Goals, Scope ও Success Metrics
+2.1 Business Goals
+Facebook ও social-commerce seller-দের জন্য সহজ onboarding এবং product listing ব্যবস্থা তৈরি করা।
+Buyer-দের জন্য reliable multi-seller shopping, checkout এবং order status experience তৈরি করা।
+Manual moderation দিয়ে low-quality, misleading, duplicate বা prohibited product listing নিয়ন্ত্রণ করা।
+Commission, payment, courier reconciliation এবং seller payable amount-এর নির্ভুল হিসাব রাখা।
+SEO, paid marketing, social catalog distribution এবং campaign attribution-এর মাধ্যমে বিক্রি বাড়ানো।
+Future scale-এর জন্য modular architecture, clear API contracts এবং auditable financial records তৈরি করা।
+2.2 In Scope — প্রথম Release
+Public storefront: Homepage, shop, category, product detail, search, cart, checkout, static pages, blog/FAQ।
+Buyer registration/login, profile, address, order history, tracking, review, return request।
+Seller onboarding, store profile, product CRUD, image upload, inventory, order processing, earnings view।
+Admin/Authority seller review, product approval, order oversight, commission configuration, complaints।
+COD এবং অন্তত একটি approved online payment gateway integration।
+Product image processing, company watermark এবং approved background templates।
+Meta OAuth/catalog integration-এর initial implementation, API permission পাওয়া সাপেক্ষে; fallback হিসেবে CSV/manual import।
+SEO metadata, XML sitemap, robots.txt, canonical URL, Product structured data এবং analytics integration।
+Audit logs, basic reporting, notifications, backup এবং monitoring।
+2.3 Out of Scope — MVP-তে নয়
+Native Android/iOS apps (API architecture future mobile support উপযোগী হবে)।
+International currency, international shipping ও cross-border tax handling।
+AI recommendation engine, advanced personalization এবং automated fraud ML।
+Full ERP/accounting suite, warehouse management এবং complex multi-warehouse routing।
+Unrestricted scraping of arbitrary Facebook pages or posts।
+Automatic seller payout without verified gateway/courier reconciliation and approved payout process।
+2.4 Success Metrics / KPIs
+Metric
+Definition
+Initial Target (Proposed)
+Seller activation
+Approved seller who publishes at least one product
+Onboarded seller-এর 60%+
+Product approval time
+Submission থেকে approve/reject পর্যন্ত সময়
+Business hours-এ 24 ঘণ্টার মধ্যে
+Checkout conversion
+Completed orders / checkout sessions
+Baseline collect করে target set
+Order cancellation rate
+Cancelled orders / placed orders
+Category-wise monitor
+Delivery success rate
+Delivered orders / dispatched orders
+Courier/seller-wise monitor
+Payment reconciliation
+Gateway/courier record-এর সঙ্গে matched transactions
+প্রতিটি settlement cycle-এ 100% match বা exception
+Product image compliance
+Approved branding and image quality rate
+95%+
+SEO index coverage
+Eligible canonical product/category pages indexed
+Search Console দিয়ে monitor
+Support resolution time
+Complaint open থেকে resolution
+Priority অনুযায়ী SLA
+উপরের Target-গুলো প্রাথমিক business proposal, guaranteed performance নয়। MVP-এর প্রথম 30–60 দিনের real data দেখে KPI baseline এবং target পুনর্নির্ধারণ করতে হবে।
+3. User Roles ও Permission Model
+3.1 Role Definitions
+Role
+Description
+Main Responsibilities
+Buyer
+পণ্য ক্রয়কারী
+Browse, search, cart, checkout, payment, tracking, review, return
+Seller
+Marketplace merchant
+Store profile, products, stock, own orders, fulfillment, earnings
+Authority / Moderator
+Operations reviewer
+Seller verification, product review, complaints, moderation, limited order review
+Admin / Super Admin
+Platform owner/operator
+All platform settings, users, commission, payments, marketing, roles, reports
+3.2 Role-Based Access Control (RBAC)
+শুধু user.role দেখে permission নির্ধারণ না করে granular permission system ব্যবহার করতে হবে। উদাহরণ: products.create, products.update_own, products.approve, sellers.verify, orders.view_own, orders.view_all, finance.view, finance.reconcile, commission.manage, users.suspend, seo.manage।
+Permission
+Buyer
+Seller
+Authority
+Admin
+products.read_public
+Yes
+Yes
+Yes
+Yes
+products.create_own
+No
+Yes
+No
+Yes
+products.update_own
+No
+Yes
+No
+Yes
+products.approve
+No
+No
+Yes (scoped)
+Yes
+seller.verify
+No
+No
+Yes (scoped)
+Yes
+orders.view_own
+Yes
+Yes (seller suborders)
+Limited
+Yes
+orders.view_all
+No
+No
+Scoped
+Yes
+commission.manage
+No
+No
+No
+Yes
+payout.review
+No
+No
+Optional scoped
+Yes
+roles.manage
+No
+No
+No
+Super Admin only
+audit.view
+No
+No
+Scoped
+Yes
+3.3 Permission Enforcement Rules
+Frontend route guard শুধু UX layer; প্রকৃত authorization অবশ্যই Backend API-তে enforce হবে।
+Seller API-তে authenticated sellerId server-side session থেকে নির্ধারণ করতে হবে; request body থেকে sellerId বিশ্বাস করা যাবে না।
+Seller শুধু নিজের Store, Products, SellerOrders, Import Jobs, Payouts এবং allowed analytics দেখতে পারবে।
+Authority কেবল assigned moderation scope-এ কাজ করবে; financial configuration বা role management করতে পারবে না।
+Admin-এর sensitive action-এ reason, actor, timestamp এবং before/after snapshot AuditLog-এ রাখতে হবে।
+Super Admin account-এ MFA/2FA strongly recommended।
+4. End-to-End Business Workflows
+4.1 Seller Onboarding Workflow
+Visitor Seller Registration নির্বাচন করে phone/email, password এবং basic profile জমা দেবে।
+Phone OTP এবং প্রয়োজনীয় email verification সম্পন্ন হবে।
+Seller store name, business type, address, support contact এবং verification information জমা দেবে।
+Authority/Admin Seller application review করবে। প্রয়োজন হলে additional document চাইবে।
+Approved হলে Seller Dashboard-এর product management permission সক্রিয় হবে।
+Rejected হলে reason এবং resubmission instruction দেখানো হবে।
+4.2 Product Submission & Approval Workflow
+Seller creates/imports product -> Draft -> Submit for review -> PendingAuthority reviews content/images/price/category/policy -> Approved or RejectedApproved + Active + In stock -> Published storefront listingRejected -> Seller edits -> Resubmit -> New review event
+Pending বা Rejected product public search engine-এ index করা যাবে না।
+Approved product-এর critical edit (name, price, images, claims, category) হলে re-review trigger করা যাবে।
+Stock update-এর মতো low-risk field change সাধারণত re-approval ছাড়াই হবে, তবে audit trail থাকবে।
+Suspended product public storefront থেকে দ্রুত unpublish হবে এবং sitemap থেকে বাদ যাবে।
+4.3 Buyer Purchase Workflow
+Buyer category/search/product page থেকে product নির্বাচন করে cart-এ যোগ করবে।
+Checkout-এ delivery address, phone, shipping option এবং payment method নির্বাচন করবে।
+Backend cart item, price, stock, seller status, product status, shipping estimate এবং discount পুনরায় validate করবে।
+একটি Parent Order তৈরি হবে এবং প্রতিটি Seller-এর জন্য আলাদা SellerOrder/Suborder তৈরি হবে।
+COD হলে order pending confirmation/confirmed state-এ যাবে; online হলে payment gateway session তৈরি হবে।
+Online payment webhook verify হওয়ার পর payment paid হিসেবে mark হবে এবং seller fulfillment workflow release হবে।
+Seller order confirm, pack, dispatch এবং tracking information update করবে।
+Delivery status courier integration বা manual confirmation থেকে update হবে।
+Delivery ও reconciliation policy অনুযায়ী commission এবং seller payable amount হিসাব হবে।
+4.4 Multi-Seller Cart Example
+Cart Item
+Seller
+Unit Price
+Qty
+Line Total
+Bluetooth Headphone
+Seller A
+৳1,500
+1
+৳1,500
+Phone Cover
+Seller B
+৳300
+2
+৳600
+Desk Lamp
+Seller A
+৳800
+1
+৳800
+Subtotal
+৳2,900
+Shipping (example)
+৳140
+Grand Total
+৳3,040
+Buyer একবার Checkout করলেও Backend Seller A ও Seller B-এর জন্য পৃথক SellerOrder তৈরি করবে। Seller A নিজের Headphone ও Lamp-এর order details দেখবে; Seller B শুধু Phone Cover-এর order দেখবে। Shipping charge seller, location, package এবং courier rules অনুযায়ী split বা allocate হবে।
+4.5 Return / Refund Workflow
+Buyer order item বা seller suborder-এর জন্য return/refund request জমা দেবে।
+Reason, optional photo/video evidence এবং requested resolution সংরক্ষণ হবে।
+Authority/Admin policy অনুযায়ী request review করবে; Seller response চাইতে পারে।
+Approved return হলে pickup/return instructions দেওয়া হবে।
+Returned product receive ও inspection-এর পর refund amount final হবে।
+Commission, seller payable এবং ledger-এ reversal/adjustment entry তৈরি হবে।
+প্রতিটি step-এর actor, reason, timestamp এবং status history থাকবে।
+5. Functional Requirements — Public Storefront
+ID
+Feature
+Requirement / Expected Behaviour
+Priority
+WEB-001
+Homepage
+Hero banner, category navigation, featured products, campaign sections, best sellers, trust information এবং SEO content থাকবে।
+Must
+WEB-002
+Category listing
+Category, subcategory, product count, filters, sorting এবং pagination থাকবে।
+Must
+WEB-003
+Product detail
+Images, title, price, stock status, variant, seller/store, delivery note, description, return policy, reviews থাকবে।
+Must
+WEB-004
+Search
+Keyword search, autocomplete (future), filters, sorting এবং no-result suggestions থাকবে।
+Must
+WEB-005
+Store page
+প্রতিটি approved seller-এর public store page থাকবে; seller status ও published products অনুযায়ী content দেখাবে।
+Should
+WEB-006
+Responsive UI
+Mobile-first layout; phone, tablet, desktop-এ usable experience।
+Must
+WEB-007
+Static content
+About, Contact, FAQ, Privacy, Terms, Return/Refund, Shipping Policy pages থাকবে।
+Must
+WEB-008
+Blog/CMS
+SEO-focused article/category publishing; author, slug, metadata, publish date।
+Should
+WEB-009
+Product comparison
+MVP-এর পর category-appropriate comparison option।
+Could
+WEB-010
+Recently viewed
+Buyer-এর recent product history, privacy-aware implementation।
+Could
+5.1 Product Listing UX Example
+Product Card-এ image, product name, price, discount (যদি থাকে), stock availability, rating (যথেষ্ট verified review থাকলে), seller/store label এবং quick add-to-cart থাকবে। Product Card-এ false scarcity, fake discount বা unverified review দেখানো যাবে না।
+5.2 Search & Filtering
+Keyword search: product name, description, SKU, brand এবং category text।
+Filters: category, price range, brand, availability, rating, seller/store, delivery area (যদি data থাকে)।
+Sort: relevance, newest, price low-high, price high-low, popularity (validated data ভিত্তিক)।
+Search URL shareable হবে; query parameters canonical/indexing policy অনুযায়ী handle হবে।
+Search results page সাধারণত user-specific/dynamic; low-quality filter combinations index করা যাবে না।
+6. Buyer Account & Dashboard
+ID
+Feature
+Details
+Priority
+BUY-001
+Registration/Login
+Phone OTP এবং/or email; secure password; account recovery।
+Must
+BUY-002
+Profile
+Name, verified phone/email, optional profile image।
+Must
+BUY-003
+Address book
+Multiple addresses; district, upazila, area, detailed address, recipient phone।
+Must
+BUY-004
+Cart
+Multiple seller product; quantity update; stock/price revalidation।
+Must
+BUY-005
+Wishlist
+Saved product; unavailable product state দেখাবে।
+Should
+BUY-006
+Order history
+Parent order ও seller suborder status summary।
+Must
+BUY-007
+Order detail
+Items, amount breakdown, payment, shipment, status timeline।
+Must
+BUY-008
+Review
+শুধু eligible delivered/purchased item-এর review।
+Should
+BUY-009
+Return request
+Eligible order item-এর return/refund request।
+Should
+BUY-010
+Notifications
+Order, payment, shipping, refund এবং account alerts।
+Must
+BUY-011
+Privacy controls
+Account data access/correction এবং account deletion request workflow।
+Should
+6.1 Buyer Order Status Timeline
+Order placed -> Payment pending/paid or COD pending-> Seller confirmed -> Processing/Packed -> Shipped-> Out for delivery (if courier supports) -> Delivered-> Return requested / Completed
+Buyer-কে order status change-এর সময় in-app notification এবং প্রয়োজন অনুযায়ী SMS/email দিতে হবে। SMS provider ও cost আলাদা configuration হবে।
+7. Seller Portal & Store Management
+ID
+Feature
+Details
+Priority
+SEL-001
+Seller application
+Basic details, store name, business type, address, verification details।
+Must
+SEL-002
+Store profile
+Store logo, cover, description, support contact, public slug।
+Must
+SEL-003
+Product CRUD
+Draft, create, edit, duplicate, archive product।
+Must
+SEL-004
+Bulk upload
+CSV template, field validation, row-level errors।
+Should
+SEL-005
+Inventory
+Stock quantity, low-stock alert, variant stock।
+Must
+SEL-006
+Approval tracking
+Pending, approved, rejected, suspended এবং rejection reason।
+Must
+SEL-007
+Seller orders
+Only own SellerOrders; item-level and shipment-level status।
+Must
+SEL-008
+Fulfillment
+Confirm, pack, dispatch, courier name, tracking ID, dispatch date।
+Must
+SEL-009
+Earnings
+Gross sales, commission, refunds, adjustments, payable balance।
+Must
+SEL-010
+Payout requests
+Eligible payable amount থেকে request; bank/MFS payout details protected।
+Should
+SEL-011
+Facebook integration
+Connect page, view accessible catalogs, import jobs, disconnect।
+Should
+SEL-012
+Performance analytics
+Sales, order count, top products, cancellation and delivery stats।
+Should
+SEL-013
+Seller support
+Ticket/complaint submission and response history।
+Should
+7.1 Seller Dashboard Overview
+আজকের/মাসের orders এবং sales summary।
+Pending orders, awaiting dispatch, delayed dispatch এবং return requests।
+Pending product approvals এবং rejected product action list।
+Low-stock product alerts।
+Gross sales, estimated commission, refunds, adjustments এবং payable balance আলাদা দেখানো।
+Facebook import connection status এবং recent import jobs।
+7.2 Seller Restrictions
+Seller অন্য Seller-এর customer details, order, product cost, ledger বা payout data দেখতে পারবে না।
+Seller নিজে commission rate পরিবর্তন করতে পারবে না।
+Seller approval ছাড়া public product URL তৈরি হলেও public content প্রকাশ করা যাবে না।
+Seller order item-এর price বা product snapshot edit করতে পারবে না।
+Seller-এর store suspended হলে policy অনুযায়ী new order বন্ধ হবে; existing orders নিষ্পত্তির workflow থাকবে।
+8. Product Management, Moderation ও Branding
+8.1 Product Data Requirements
+Product title, description, category, brand, SKU, condition, price, compare-at price (যদি বৈধ), stock এবং shipping dimensions (যদি প্রয়োজন)।
+Product variants: size, color, material, model; প্রতিটি variant-এর SKU, price, stock এবং image থাকতে পারে।
+Image gallery: original asset, processed asset, thumbnail, alt text এবং processing status।
+Source metadata: manual, Facebook catalog, CSV বা API; external product/page reference এবং import timestamp।
+SEO fields: slug, meta title, meta description, canonical policy, structured data source fields।
+Moderation fields: status, reviewer, reviewedAt, rejection reason, revision number এবং moderation history।
+8.2 Product Status Lifecycle
+Status
+Meaning
+Public Visibility
+draft
+Seller তৈরি করেছে কিন্তু review-তে দেয়নি
+Hidden
+pending
+Approval অপেক্ষায়
+Hidden / noindex
+approved
+Authority/Admin approved করেছে
+শুধু active ও available হলে visible
+rejected
+Review-তে reject হয়েছে
+Hidden; seller edit করতে পারবে
+suspended
+Policy বা complaint কারণে temporarily unavailable
+Hidden
+archived
+Seller বা Admin archive করেছে
+Hidden
+8.3 Manual Approval Checklist
+Product title/description স্পষ্ট এবং misleading নয়।
+Product image-এর rights/authorization seller নিশ্চিত করেছে।
+Price, variant, stock এবং product claims সঙ্গতিপূর্ণ।
+Product prohibited/restricted category-তে পড়ে না।
+Brand/trademark misuse, counterfeit claim বা copied content আছে কি না review।
+Image quality এবং marketplace watermark/background policy অনুসরণ করছে কি না।
+Category, shipping/return policy এবং required attributes সঠিক।
+8.4 Image Branding Pipeline
+Seller uploads original image -> File type/size/security validation -> Store immutable original -> Optional background removal (only when appropriate) -> Apply approved background template -> Apply company watermark -> Generate thumbnail / card / detail variants -> Save processed asset metadata -> Product moderation queue
+Original image কখনো overwrite করা যাবে না। AI background replacement ঐচ্ছিক হবে এবং product-এর প্রকৃত রং, shape, label বা বৈশিষ্ট্য বদলে ফেললে ব্যবহার করা যাবে না। Watermark product-এর গুরুত্বপূর্ণ অংশ ঢাকবে না। Company watermark-এর পাশাপাশি Seller-এর content ownership/permission নিশ্চিত করতে হবে।
+Image Variant
+Suggested Dimension
+Usage
+Thumbnail
+300 × 300 px
+Seller/Admin tables
+Product card
+600 × 600 px
+Shop/category grids
+Product detail
+1200 × 1200 px
+Product gallery
+Original
+Uploaded original size
+Private source archive
+Dimensions category অনুযায়ী পরিবর্তনযোগ্য। Image processing-এর জন্য Sharp এবং image delivery/transform-এর জন্য Cloudinary বা S3-compatible object storage ব্যবহার করা যেতে পারে।
+9. Facebook Page / Catalog Import
+9.1 Purpose
+Seller-এর Facebook Business Page বা Meta Commerce catalog-এ থাকা product data, Meta-এর official API ও granted permissions-এর সীমার মধ্যে Marketplace-এ আনার সুবিধা থাকবে। এটি seller onboarding friction কমাবে এবং existing social-commerce catalog reuse করতে সাহায্য করবে।
+9.2 Supported Import Methods
+Method
+Description
+Dependency
+Meta OAuth + Catalog
+Seller authenticates and selects a catalog/page they are authorized to manage; accessible products import হবে।
+Meta App, permissions, app review, business/page access
+CSV Import
+Marketplace-provided CSV template দিয়ে products bulk upload।
+Seller file upload
+Manual Import
+Seller title, price, image, description এবং source URL দিয়ে product draft তৈরি করবে।
+Seller rights and data entry
+Page Post URL
+MVP-তে শুধু permitted/approved workflow; arbitrary scraping নয়।
+API capability, Meta policy, seller authorization
+9.3 Import User Journey
+Seller Dashboard → Integrations → Connect Facebook নির্বাচন করবে।
+Backend OAuth state/CSRF protection তৈরি করে Meta authorization flow শুরু করবে।
+Seller Meta login করে requested permissions consent দেবে।
+Backend callback state validate করবে এবং token securely encrypted storage-এ রাখবে।
+Seller accessible Page/Catalog list দেখবে এবং import source নির্বাচন করবে।
+Backend import job queue-তে জমা দেবে; API immediate job ID ফেরত দেবে।
+Worker API rate limits, pagination এবং retry rules মেনে products fetch করবে।
+Imported data internal product schema-তে normalize হবে; missing fields seller review queue-তে যাবে।
+Images permitted access অনুযায়ী fetch/process হবে; rights validation seller-এর responsibility এবং moderation check হবে।
+Imported products Draft/Pending state-এ থাকবে; manual approval ছাড়া publish হবে না।
+9.4 Import Data Mapping
+External Data
+Marketplace Field
+Rule
+Catalog product ID
+sourceProductId
+External source reference; globally unique নয়, source context-সহ রাখবে
+Product name
+name
+Required; length validation
+Description
+description
+Sanitize HTML; script remove
+Price
+price
+Currency convert/validate; BDT final seller confirmation
+Availability
+stock/status
+API field পাওয়া গেলে draft suggestion; seller confirm করবে
+Image URL
+original image asset
+Access/rights validate; URL সরাসরি public trust করবে না
+Product link
+sourceUrl
+Reference only; safe URL validation
+Page/Catalog ID
+source metadata
+Connected integration record-এর সঙ্গে bind
+9.5 Facebook Import Technical Requirements
+OAuth state parameter, CSRF protection, redirect URI allowlist এবং token encryption বাধ্যতামূলক।
+Access token Frontend-এ পাঠানো যাবে না; token secret vault/secure encrypted field-এ থাকবে।
+Only pages/catalogs that the authenticated seller is authorized to manage will be available for import.
+Meta API version pinning, rate-limit handling, pagination, retry with exponential backoff এবং token revocation handling থাকবে।
+Import job idempotent হবে: একই external product পুনরায় import করলে duplicate product না বানিয়ে update/diff review দেখাবে।
+Seller disconnect করলে token revoke/delete policy, imported data retention এবং existing Marketplace products-এর status policy নির্ধারিত থাকবে।
+Meta policy বা permission না থাকলে scraping দিয়ে bypass করা যাবে না; CSV/manual import fallback থাকবে।
+Meta App Review, business verification এবং permission availability implementation-এর আগে যাচাই করতে হবে।
+9.6 Import Job Status
+Status
+Description
+queued
+Job queue-তে অপেক্ষা করছে
+processing
+Catalog/page data import হচ্ছে
+completed
+সব eligible record process হয়েছে
+completed_with_errors
+কিছু record import হয়েছে, কিছু ব্যর্থ
+failed
+Job সম্পন্ন হয়নি
+cancelled
+Seller/Admin cancel করেছে
+Progress response example:
+{  "jobId": "imp_01J...",  "status": "processing",  "total": 120,  "completed": 42,  "failed": 3,  "skipped": 5}
+9.7 Meta Integration References
+Meta Graph API documentation: https://developers.facebook.com/docs/graph-api/
+Meta Catalog documentation: https://developers.facebook.com/documentation/ads-commerce/catalog/
+Meta permissions documentation: https://developers.facebook.com/docs/permissions/
+নোট: API endpoint, permission name, product read capability এবং App Review requirement Meta-এর বর্তমান documentation ও app configuration অনুযায়ী implementation-এর সময় পুনরায় যাচাই করতে হবে।
+10. Cart, Checkout, Order & Fulfillment
+10.1 Cart Rules
+Cart buyer-specific হবে; guest cart চাইলে session-based রাখা যায়।
+একটি cart-এ একাধিক seller-এর product থাকতে পারবে।
+Checkout-এর আগে price, stock, active status এবং seller eligibility server-side পুনরায় যাচাই হবে।
+Cart-এর price trusted নয়; authoritative price Product/Variant record থেকে নেওয়া হবে।
+Out-of-stock বা suspended product checkout-এ block হবে এবং buyer-কে clear message দেখাবে।
+10.2 Checkout Rules
+Buyer delivery address এবং contact phone select/add করবে।
+Shipping charge seller/courier/area/weight/parcel rules অনুযায়ী calculate হবে; MVP-তে configurable flat/zone rate হতে পারে।
+Coupon eligibility, seller-specific discount এবং platform-funded discount আলাদা হিসাব হবে।
+Buyer checkout submit করলে idempotency key দিয়ে duplicate order prevent হবে।
+Order creation ও stock reservation transaction/atomic operation দিয়ে নিরাপদ করতে হবে।
+Payment failure হলে order/payment state consistent থাকবে; stock reservation expiry policy থাকবে।
+10.3 Parent Order & Seller Suborder
+একটি Parent Order buyer-এর single checkout experience ধরে রাখবে। SellerOrders আলাদা seller fulfillment, shipping, commission এবং payout tracking করবে। Order item-এর name, SKU, variant, unit price, tax/discount allocation এবং seller snapshot order creation-এর সময় copy করে রাখতে হবে; পরবর্তীতে product edit হলেও historical order বদলাবে না।
+10.4 Fulfillment Statuses
+Status
+Owner/Trigger
+Meaning
+pending_confirmation
+System/Seller
+Seller confirmation অপেক্ষায়
+confirmed
+Seller
+Seller order গ্রহণ করেছে
+processing
+Seller
+প্যাকেজ প্রস্তুত হচ্ছে
+packed
+Seller
+Parcel packed
+shipped
+Seller/Courier
+Courier-এ handover; tracking details থাকলে সংরক্ষণ
+out_for_delivery
+Courier/Manual
+Delivery attempt চলছে; provider support থাকলে
+delivered
+Courier/Admin/Verified process
+Buyer delivery সম্পন্ন
+delivery_failed
+Courier/Seller
+Delivery attempt unsuccessful
+cancelled
+Authorized actor
+Policy অনুযায়ী order cancel
+return_requested
+Buyer
+Return request এসেছে
+returned
+Operations
+Return received/verified
+refunded
+Finance/System
+Refund completed
+10.5 Seller Fulfillment Requirements
+Seller শুধু নিজের SellerOrder দেখতে এবং update করতে পারবে।
+Seller dispatch করার সময় courier name, tracking number, handover date দিতে পারবে।
+Late dispatch এবং overdue order dashboard-এ alert হবে।
+Seller-এর cancellation reason বাধ্যতামূলক; repeated cancellation performance report-এ যাবে।
+Courier integration না থাকলে Admin/Operations manual status update করতে পারবে; audit log থাকবে।
+Buyer-এর phone/address শুধু fulfillment-এর প্রয়োজনীয় সীমায় Seller-কে দেখাতে হবে; privacy policy অনুযায়ী access control থাকবে।
+11. Payment, Commission, Ledger & Payout
+11.1 Payment Methods
+Method
+Flow
+Important Controls
+COD
+Buyer order places; seller dispatch; courier/customer cash collect; courier settlement reconcile।
+COD confirmation, failed delivery, courier remittance, collection evidence
+Online
+Backend creates gateway session; gateway processes; signed/verified server callback confirms payment।
+Server-side validation, signature/IPN validation, duplicate callback idempotency
+Bangladesh market-এর জন্য SSLCommerz-এর মতো aggregator দিয়ে শুরু করা যেতে পারে; পরে merchant eligibility ও API access অনুযায়ী bKash/Nagad direct integration যোগ করা যাবে। কোনো gateway-এর production access, merchant approval বা marketplace split-settlement feature নিশ্চিত ধরে নেওয়া যাবে না।
+11.2 Payment State Machine
+initiated -> pending -> success                  -> failedsuccess -> partially_refunded -> refunded
+11.3 Commission Rules
+Commission percentage Admin-controlled global default এবং seller/category override support করতে পারে। Order/SellerOrder তৈরির সময় applicable commission rate snapshot করতে হবে। Rate change future order-এ প্রযোজ্য হবে; historical order-এর rate পরিবর্তন হবে না।
+Example
+Amount
+Seller product subtotal
+৳3,000
+Commission rate
+10%
+Platform commission
+৳300
+Seller gross payable before other adjustments
+৳2,700
+Commission base-এর মধ্যে shipping, seller discount, platform discount, tax, refund এবং gateway fee অন্তর্ভুক্ত হবে কি না—এটি আলাদা commission policy-তে স্পষ্টভাবে নির্ধারণ করতে হবে। Recommended baseline: product item net amount-এর উপর commission; shipping এবং gateway fee আলাদা ledger component। বাস্তব contract/merchant model অনুযায়ী final হবে।
+11.4 Financial Ledger
+শুধু Seller-এর earnings field increment/decrement করে হিসাব রাখা যাবে না। Double-entry বা equivalent append-only financial ledger রাখতে হবে। প্রতিটি transaction-এ debit/credit account, amount in poisha, currency, reference type/id, event, idempotency key এবং createdAt থাকবে। Existing ledger entry edit/delete করা যাবে না; correction হলে reversal/adjustment entry হবে।
+Ledger Event
+Possible Entries (Simplified)
+Online payment captured
+Gateway clearing/receivable debit; buyer order liability/clearing credit (accounting policy অনুযায়ী)
+Commission earned
+Seller payable debit; platform commission revenue credit
+Seller payout
+Seller payable debit; bank/MFS payout clearing credit
+Refund
+Relevant seller/platform payable and payment clearing account reverse/adjust
+COD remittance
+Courier COD receivable debit/credit settlement entry as per reconciliation
+11.5 Seller Settlement / Payout
+Seller payout timing এখনো final নয়। তাই payout policy configurable রাখতে হবে: after delivery + return window, weekly, monthly বা manual approval। MVP-তে Admin-controlled manual settlement queue রাখা নিরাপদ। Automated payout পরে bank/MFS payout provider এবং legal/compliance process যাচাই করে যুক্ত হবে।
+Seller payable amount = eligible sales − commission − seller-funded discounts − approved refunds/adjustments − other contractually agreed charges।
+COD amount courier থেকে marketplace/seller কার কাছে আসে—চুক্তি অনুযায়ী settlement mapping হবে।
+Online gateway settlement report daily/periodic import করে internal transaction-এর সঙ্গে reconcile করতে হবে।
+Payout request, approval, processing, success, failed এবং reversed states থাকবে।
+Bank/MFS account details masked display এবং strict permission protection থাকবে।
+11.6 Payment Webhook Requirements
+Webhook endpoint publicly reachable হলেও signature/verification ছাড়া payment success mark করা যাবে না।
+Gateway transaction ID unique এবং idempotent হতে হবে।
+Frontend redirect success page কখনো authoritative payment confirmation নয়।
+Webhook retry duplicate হলে duplicate order/commission/payout তৈরি করা যাবে না।
+Payment amount, currency, order reference এবং merchant account মিলিয়ে verify করতে হবে।
+Daily reconciliation report ও mismatch exception queue থাকতে হবে।
+12. Admin & Authority Console
+12.1 Admin Modules
+Module
+Capabilities
+Dashboard
+GMV, net platform revenue, orders, buyers, sellers, pending approvals, cancellation, refund
+User Management
+Search, status, suspend/reactivate, role assignment (permission protected)
+Seller Management
+Application review, verification, store status, risk flags
+Product Management
+All products, approval, reject reason, category, featured, suspend
+Order Management
+Parent order and suborder search, status history, escalation
+Payment & Finance
+Gateway transaction, COD reconciliation, ledger, refund, payout
+Commission
+Global default, seller/category override, effective dates, historical snapshots
+Marketing
+Campaigns, banners, coupons, featured placement, campaign attribution
+SEO & CMS
+Metadata, pages, blog, redirect, sitemap controls
+Branding
+Logo, watermark, image templates, image-processing defaults
+Moderation
+Reported content, prohibited product review, complaint workflow
+Settings
+Shipping rules, notification templates, policies, API integrations
+Audit
+Sensitive action history, exportable audit records
+12.2 Authority / Moderator Modules
+Seller verification queue এবং required-document review।
+Pending product queue, image/content checks এবং approve/reject action।
+Reported product/seller review এবং escalation to Admin।
+Buyer complaint, seller response, dispute evidence এবং resolution recommendation।
+Authority নিজের action history দেখতে পারবে; finance/commission/role management access পাবে না।
+12.3 Admin Analytics Definitions
+GMV: confirmed eligible order item value; cancelled/refunded treatment স্পষ্টভাবে define করতে হবে।
+Platform commission revenue: earned commission less reversed commission; payout cash movement থেকে আলাদা।
+Net collected amount: payment gateway/courier-এ বাস্তবে collected/settled amount।
+Seller payable: eligible seller amount not yet paid, after adjustments।
+Order count: Parent Order এবং SellerOrder আলাদা metric হিসেবে দেখাতে হবে।
+13. Marketing, Promotion ও Analytics
+13.1 Marketing Features
+Feature
+Requirements
+Campaign manager
+Campaign name, dates, objective, budget/reference, products/categories, channel, status
+Homepage banners
+Desktop/mobile assets, destination URL, schedule, alt text, click tracking
+Featured products
+Admin-selected products with start/end date and placement
+Coupons
+Fixed/percentage discount, usage limit, min spend, expiry, seller/platform funding
+Flash sale
+Time-bound price/discount with stock and eligibility rules
+Email/SMS campaigns
+Consent-aware audience segmentation and unsubscribe/opt-out
+Abandoned cart
+Reminder workflow with frequency cap and opt-out
+Affiliate/referral
+Future phase: referral code, attribution window, commission policy
+Meta/Google tracking
+Consent/privacy-aware pixel and conversion event integration
+13.2 Campaign Attribution
+Campaign link-এ UTM parameters, campaign ID এবং permitted first/last-touch attribution data capture করা হবে। Checkout-এর সময় order attribution snapshot হবে। Analytics-এ campaign spend manually/imported হলে ROAS estimate করা যাবে; external ad platform spend data API integration future scope।
+13.3 Analytics Events
+view_item, view_item_list, search, add_to_cart, remove_from_cart, begin_checkout, purchase।
+Seller events: product_submitted, product_approved, import_started, import_completed, order_dispatched।
+Admin events: seller_verified, product_approved, commission_rule_updated, refund_approved।
+Events-এ unnecessary personal data পাঠানো যাবে না; user consent ও applicable policy মানতে হবে।
+14. SEO & Content Management
+14.1 SEO Requirements
+SEO Element
+Implementation
+Rendering
+Public product/category/content pages use SSR/ISR strategy; dashboards private/noindex
+Metadata
+Unique title, meta description, Open Graph, Twitter/social preview
+URL
+Readable stable slug; slug changes create redirect
+Canonical
+Canonical URL for primary indexable page; duplicate variants/filter pages controlled
+Sitemap
+Dynamic XML sitemap segmented for products, categories, stores, articles
+Robots
+robots.txt controls crawling; noindex for private, pending, internal search where appropriate
+Structured Data
+Product, Offer, BreadcrumbList, Organization, Article where eligible
+Images
+Descriptive alt text, responsive images, WebP/AVIF, dimensions, lazy loading below fold
+Performance
+Core Web Vitals monitoring; avoid excessive client-side rendering
+Internationalization
+Bangla and English content fields/URL strategy may be phased
+14.2 Product SEO Fields
+SEO title: product name + relevant differentiator; keyword stuffing নয়।
+Meta description: unique concise summary, accurate price/availability context if included।
+Slug: lowercase, readable, stable; duplicate slug unique handling।
+Product schema: accurate name, image, description, SKU/brand if available, Offer price/currency/availability।
+AggregateRating শুধু genuine eligible reviews থাকলে এবং schema policy অনুযায়ী।
+Price/availability structured data page content-এর সঙ্গে consistent থাকতে হবে।
+14.3 Indexing Rules
+Draft, pending, rejected, suspended এবং unpublished products index হবে না।
+Out-of-stock product policy অনুযায়ী page live থাকতে পারে; availability InStock নয়, OutOfStock দেখাতে হবে।
+Faceted filter URLs index করার আগে SEO strategy review করতে হবে।
+Deleted/merged product-এর জন্য 301 redirect বা 410 policy নির্ধারণ করতে হবে।
+Seller dashboard, admin, buyer private pages noindex এবং authentication-protected হবে।
+14.4 CMS Requirements
+About, Contact, FAQ, policies, landing pages এবং blog post editor।
+Draft, scheduled, published, archived status।
+Author, publish date, slug, category, tags, meta title/description, featured image।
+Content revision history এবং preview।
+15. Technical Architecture
+15.1 Recommended Stack
+Layer
+Technology
+Reason / Usage
+Frontend
+Next.js App Router + TypeScript
+SSR/ISR, SEO, route organization, server components
+UI
+Tailwind CSS + shadcn/ui
+Consistent responsive design system
+Client state
+TanStack Query + Zustand (selective)
+API cache/server state and small UI/cart state
+Forms
+React Hook Form + Zod
+Validated forms
+Backend
+Node.js + Express.js + TypeScript
+REST API and modular business logic
+Database
+MongoDB Atlas + Mongoose
+Document database, transactions, indexes
+Cache/Queue
+Redis + BullMQ
+Job processing, rate limit, cache
+Realtime
+Socket.IO or polling
+Import progress and notifications
+Images
+Cloudinary or S3 + Sharp
+Secure image storage and transformations
+Search
+MongoDB Atlas Search initially; Meilisearch later if needed
+Product search and filters
+Payments
+Approved Bangladesh gateway
+Online payment and verification
+Monitoring
+Sentry + structured logs
+Error tracking and observability
+Deployment
+Vercel (web) + AWS/DigitalOcean (API/worker)
+Separate scaling and deployment
+15.2 Architecture Pattern
+MVP-তে Modular Monolith ব্যবহার করতে হবে। API, Worker এবং Web আলাদা deployable app হতে পারে, কিন্তু domain modules shared repository ও clear interfaces অনুসরণ করবে। Microservices প্রথম release-এ প্রয়োজন নেই।
+Client (Next.js)  | HTTPS / JSON REST  vAPI Gateway / Express App  |-- Auth & RBAC  |-- Catalog / Products  |-- Seller / Store  |-- Cart / Checkout / Orders  |-- Payments / Commission / Ledger  |-- Moderation / CMS / SEO  |-- Integrations (Meta, Courier, Gateway)  |  +--> MongoDB Atlas  +--> Redis / BullMQ  +--> Object Storage / CDN  +--> External APIsWorker Process  |-- Facebook Catalog Import  |-- Image Processing  |-- Notifications  |-- Sitemap Generation  |-- Reconciliation / Reports
+15.3 Backend Module Structure
+apps/api/src/modules/products/  product.model.ts  product.routes.ts  product.controller.ts  product.service.ts  product.repository.ts  product.validation.ts  product.permission.ts  product.types.ts
+Route: endpoint registration এবং middleware chain।
+Controller: request/response handling; business rule নয়।
+Service: business logic এবং workflow orchestration।
+Repository: database query encapsulation।
+Model: Mongoose schema, indexes, hooks (critical logic service-এ রাখাই উত্তম)।
+Validation: Zod request/params/query schemas।
+Permission: role/resource-level access policy।
+15.4 Suggested Repository Structure
+marketplace/  apps/    web/                 # Next.js storefront + dashboards    api/                 # Express REST API    worker/              # BullMQ background workers  packages/    shared-types/    validators/    constants/    config/  infrastructure/    docker/    scripts/  docs/    product-requirements/    api/    database/  .env.example  package.json  README.md
+15.5 API Versioning & Environments
+API prefix: /api/v1।
+Environments: local, development, staging, production।
+Separate database, payment credentials, Meta app configuration and storage bucket per environment।
+OpenAPI/Swagger specification maintain করতে হবে।
+Breaking API change হলে /api/v2 বা versioned compatibility policy।
+16. MongoDB Data Model & Index Strategy
+নিচের schema-গুলো logical blueprint। বাস্তব implementation-এ required fields, validation, enum, compound indexes, timestamps, soft delete, schema versioning এবং data retention policy যুক্ত করতে হবে। Sensitive field encryption এবং object-level authorization আলাদাভাবে implement করতে হবে।
+16.1 Core Collections
+Collection
+Purpose
+Key References
+users
+All account identities
+role, status
+roles / permissions
+Granular access policy
+roleId, permissionKey
+sellerProfiles
+Seller verification and business data
+userId
+stores
+Public store profile
+sellerId, slug
+categories
+Hierarchical catalog categories
+parentId
+brands
+Brand directory
+name, slug
+products
+Product core record
+sellerId, categoryId, brandId
+productVariants
+Variant-specific SKU/price/stock if normalized
+productId
+productMedia
+Original and processed image assets
+productId, ownerId
+moderationCases
+Approval/rejection history
+productId, reviewerId
+carts
+Buyer cart
+buyerId
+wishlists
+Saved products
+buyerId
+addresses
+Buyer delivery addresses
+userId
+orders
+Parent checkout/order
+buyerId
+sellerOrders
+Seller-specific fulfillment order
+orderId, sellerId
+payments
+Gateway/COD payment records
+orderId, gatewayReference
+commissionRules
+Effective commission configuration
+scope, effectiveFrom
+commissionEntries
+Commission snapshots and reversals
+sellerOrderId
+ledgerEntries
+Append-only financial records
+accountId, reference
+payouts
+Seller payout requests and execution
+sellerId
+returns
+Return/refund requests
+orderId, sellerOrderId
+shipments
+Courier shipment and tracking
+sellerOrderId
+integrations
+Encrypted Meta/courier/gateway connections
+sellerId, provider
+importJobs
+Catalog import progress and errors
+sellerId, integrationId
+notifications
+In-app notification queue/history
+userId
+campaigns
+Promotions and attribution
+campaignId
+coupons
+Discount rules
+code
+reviews
+Verified buyer reviews
+buyerId, productId
+auditLogs
+Sensitive action audit trail
+actorId, resource
+contentPages / articles
+CMS and blog content
+slug
+16.2 Example Mongoose Schema — User
+const userSchema = new Schema({  name: { type: String, required: true, trim: true },  email: { type: String, lowercase: true, trim: true },  phone: { type: String, required: true, unique: true },  passwordHash: { type: String, required: true, select: false },  role: {    type: String,    enum: ["buyer", "seller", "authority", "admin"],    required: true  },  status: {    type: String,    enum: ["pending", "active", "suspended", "blocked"],    default: "pending"  },  phoneVerifiedAt: Date,  emailVerifiedAt: Date,  lastLoginAt: Date}, { timestamps: true });
+16.3 Example Mongoose Schema — Product
+const productSchema = new Schema({  sellerId: { type: ObjectId, ref: "SellerProfile", required: true, index: true },  storeId: { type: ObjectId, ref: "Store", required: true, index: true },  name: { type: String, required: true, trim: true, maxlength: 180 },  slug: { type: String, required: true, unique: true },  description: { type: String, default: "" },  categoryId: { type: ObjectId, ref: "Category", index: true },  brandId: { type: ObjectId, ref: "Brand" },  currency: { type: String, enum: ["BDT"], default: "BDT" },  pricePoisha: { type: Number, required: true, min: 0 },  stock: { type: Number, default: 0, min: 0 },  source: { type: String, enum: ["manual", "meta_catalog", "csv", "api"] },  sourceRef: { provider: String, catalogId: String, externalProductId: String },  media: [{ originalAssetId: ObjectId, processedAssetId: ObjectId, alt: String }],  approvalStatus: {    type: String,    enum: ["draft", "pending", "approved", "rejected", "suspended"],    default: "draft"  },  publicationStatus: {    type: String,    enum: ["unpublished", "published", "archived"],    default: "unpublished"  },  seo: { title: String, description: String },  approvedBy: ObjectId,  approvedAt: Date}, { timestamps: true });
+16.4 Example Mongoose Schema — Parent Order
+const orderSchema = new Schema({  orderNumber: { type: String, required: true, unique: true },  buyerId: { type: ObjectId, ref: "User", required: true, index: true },  itemSnapshots: [{    productId: ObjectId,    sellerId: ObjectId,    productName: String,    sku: String,    variantSnapshot: Schema.Types.Mixed,    quantity: Number,    unitPricePoisha: Number,    discountPoisha: Number,    lineTotalPoisha: Number  }],  subtotalPoisha: Number,  shippingPoisha: Number,  discountPoisha: Number,  grandTotalPoisha: Number,  currency: { type: String, default: "BDT" },  paymentMethod: { type: String, enum: ["cod", "online"] },  paymentStatus: String,  orderStatus: String,  shippingAddressSnapshot: Schema.Types.Mixed}, { timestamps: true });
+16.5 Example SellerOrder Schema
+const sellerOrderSchema = new Schema({  orderId: { type: ObjectId, ref: "Order", required: true, index: true },  sellerId: { type: ObjectId, ref: "SellerProfile", required: true, index: true },  items: [{    productId: ObjectId,    quantity: Number,    unitPricePoisha: Number,    lineTotalPoisha: Number  }],  subtotalPoisha: Number,  shippingAllocationPoisha: Number,  commissionRateBps: Number,  commissionBasePoisha: Number,  commissionPoisha: Number,  sellerPayablePoisha: Number,  fulfillmentStatus: String,  courierProvider: String,  trackingNumber: String}, { timestamps: true });
+16.6 Example Meta Import Job Schema
+const importJobSchema = new Schema({  sellerId: { type: ObjectId, required: true, index: true },  integrationId: { type: ObjectId, required: true },  provider: { type: String, enum: ["meta", "csv"] },  sourcePageId: String,  sourceCatalogId: String,  status: {    type: String,    enum: ["queued", "processing", "completed",           "completed_with_errors", "failed", "cancelled"]  },  total: { type: Number, default: 0 },  completed: { type: Number, default: 0 },  failed: { type: Number, default: 0 },  skipped: { type: Number, default: 0 },  errorSummary: [Schema.Types.Mixed],  startedAt: Date,  finishedAt: Date}, { timestamps: true });
+16.7 Index Strategy
+Collection
+Suggested Index
+Purpose
+users
+unique normalized phone; unique sparse email
+Login and duplicate prevention
+products
+unique slug; sellerId + approvalStatus; categoryId + publicationStatus
+Product lookup and seller inventory
+products
+text/search index or Atlas Search index
+Search relevance
+sellerOrders
+sellerId + createdAt; sellerId + fulfillmentStatus
+Seller dashboard
+orders
+buyerId + createdAt; unique orderNumber
+Buyer history and order lookup
+payments
+unique gateway + transaction reference
+Duplicate payment prevention
+ledgerEntries
+accountId + createdAt; referenceType + referenceId
+Ledger statement and reconciliation
+importJobs
+sellerId + createdAt; status + createdAt
+Import job dashboard
+stores
+unique slug
+Public store page
+reviews
+productId + status + createdAt
+Product review listing
+MongoDB schema validation এবং compound index বাস্তব query pattern অনুযায়ী tune করতে হবে। High-volume data-এর ক্ষেত্রে pagination cursor-based করা ভালো।
+16.8 Data Consistency Rules
+Money amount integer poisha-তে রাখবে; display-তে BDT format করবে।
+Order item-এ product name, SKU, variant, price এবং seller snapshot রাখবে।
+Commission rate basis points (যেমন 1000 = 10.00%) হিসেবে integer-এ রাখা যেতে পারে।
+Stock update atomic conditional update দিয়ে হবে; available stock-এর বেশি reserve হবে না।
+Order creation, stock reservation এবং related seller order creation যতদূর সম্ভব transaction-এ হবে।
+External payment/courier/Meta IDs provider namespace-সহ store করবে।
+Soft-delete এবং retention policy legal/accounting needs অনুযায়ী হবে; financial record delete করা যাবে না।
+17. REST API Specification
+17.1 API Conventions
+Base path: /api/v1।
+JSON request/response; timestamps ISO 8601 UTC।
+Authentication: Secure HttpOnly cookie/session strategy; CSRF protection প্রয়োজন অনুযায়ী।
+Pagination: ?limit=20&cursor=...; maximum limit enforce।
+Filtering/sorting allowlist দিয়ে validate হবে।
+Errors standard format-এ হবে: code, message, details, requestId।
+Sensitive action POST/PATCH; GET request state mutate করবে না।
+Order/payment creation-এ Idempotency-Key support থাকবে।
+17.2 Standard Response Examples
+// Success{  "success": true,  "data": { "id": "..." },  "meta": { "requestId": "req_..." }}// Error{  "success": false,  "error": {    "code": "PRODUCT_OUT_OF_STOCK",    "message": "এই পণ্যটি বর্তমানে পর্যাপ্ত স্টকে নেই।",    "details": []  },  "meta": { "requestId": "req_..." }}
+17.3 Authentication API
+Method
+Endpoint
+Access
+Purpose
+POST
+/auth/register
+Public
+Buyer account create
+POST
+/auth/seller/register
+Public
+Seller application create
+POST
+/auth/login
+Public
+Login
+POST
+/auth/logout
+Authenticated
+Logout and revoke refresh session
+POST
+/auth/refresh
+Refresh session
+Rotate refresh token
+POST
+/auth/otp/request
+Public / rate limited
+Request OTP
+POST
+/auth/otp/verify
+Public / rate limited
+Verify phone OTP
+POST
+/auth/password/forgot
+Public
+Password reset request
+POST
+/auth/password/reset
+Reset token
+Set new password
+GET
+/auth/me
+Authenticated
+Current user and safe permissions
+17.4 Public Catalog API
+Method
+Endpoint
+Purpose
+GET
+/products
+List public approved products
+GET
+/products/:slug
+Product detail
+GET
+/categories
+Category tree/list
+GET
+/categories/:slug/products
+Category product list
+GET
+/stores/:slug
+Public seller store
+GET
+/search
+Product search and filters
+GET
+/brands
+Brand directory
+GET
+/content/pages/:slug
+Published CMS page
+GET
+/content/articles/:slug
+Published article
+17.5 Buyer API
+Method
+Endpoint
+Purpose
+GET
+/buyer/profile
+Buyer profile
+PATCH
+/buyer/profile
+Update profile
+GET
+/buyer/addresses
+List addresses
+POST
+/buyer/addresses
+Create address
+PATCH
+/buyer/addresses/:id
+Update own address
+DELETE
+/buyer/addresses/:id
+Delete own address
+GET
+/cart
+Get cart
+POST
+/cart/items
+Add item
+PATCH
+/cart/items/:itemId
+Update quantity
+DELETE
+/cart/items/:itemId
+Remove item
+GET
+/wishlist
+Get wishlist
+POST
+/wishlist/items
+Add wishlist item
+DELETE
+/wishlist/items/:productId
+Remove wishlist item
+POST
+/checkout/quote
+Validate cart and calculate quote
+POST
+/orders
+Create order with idempotency
+GET
+/buyer/orders
+List own orders
+GET
+/buyer/orders/:orderNumber
+Get own order detail
+POST
+/buyer/orders/:id/cancel
+Request cancellation if eligible
+POST
+/returns
+Create return/refund request
+POST
+/reviews
+Submit eligible review
+17.6 Seller API
+Method
+Endpoint
+Purpose
+GET
+/seller/dashboard
+Seller overview
+GET
+/seller/profile
+Seller profile
+PATCH
+/seller/profile
+Update permitted profile fields
+GET
+/seller/store
+Store details
+PATCH
+/seller/store
+Update store
+GET
+/seller/products
+Own products
+POST
+/seller/products
+Create draft product
+GET
+/seller/products/:id
+Get own product
+PATCH
+/seller/products/:id
+Update own product
+POST
+/seller/products/:id/submit
+Submit for approval
+POST
+/seller/products/:id/archive
+Archive product
+POST
+/seller/products/bulk-import
+Upload CSV
+GET
+/seller/orders
+Own seller orders
+GET
+/seller/orders/:id
+Own seller order detail
+PATCH
+/seller/orders/:id/fulfillment
+Update allowed fulfillment status
+POST
+/seller/orders/:id/dispatch
+Dispatch and add tracking
+GET
+/seller/earnings
+Seller financial summary
+GET
+/seller/ledger
+Seller ledger statement
+GET
+/seller/payouts
+Payout history
+POST
+/seller/payouts
+Create payout request
+17.7 Facebook / Meta Integration API
+Method
+Endpoint
+Purpose
+GET
+/integrations/meta/connect
+Start OAuth; generate secure state
+GET
+/integrations/meta/callback
+Validate state and complete OAuth
+GET
+/integrations/meta/pages
+List accessible authorized pages
+GET
+/integrations/meta/catalogs
+List accessible catalogs
+POST
+/integrations/meta/import-jobs
+Start catalog import
+GET
+/integrations/meta/import-jobs/:id
+Get progress/status
+POST
+/integrations/meta/import-jobs/:id/cancel
+Cancel job if supported
+DELETE
+/integrations/meta/connection
+Disconnect and revoke/delete token
+17.8 Admin API
+Method
+Endpoint
+Purpose
+GET
+/admin/dashboard
+Platform KPI
+GET
+/admin/users
+User search/list
+PATCH
+/admin/users/:id/status
+Suspend/reactivate
+GET
+/admin/sellers
+Seller list
+PATCH
+/admin/sellers/:id/verification
+Approve/reject seller
+GET
+/admin/products/pending
+Moderation queue
+PATCH
+/admin/products/:id/approve
+Approve product
+PATCH
+/admin/products/:id/reject
+Reject with reason
+PATCH
+/admin/products/:id/suspend
+Suspend listing
+GET
+/admin/orders
+All parent/suborders
+GET
+/admin/payments
+Payment transactions
+GET
+/admin/ledger
+Financial ledger query
+GET
+/admin/payouts
+Payout queue
+PATCH
+/admin/payouts/:id/approve
+Approve payout
+PATCH
+/admin/commission-rules/:id
+Update future commission rule
+POST
+/admin/campaigns
+Create campaign
+PATCH
+/admin/settings
+Update allowed settings
+GET
+/admin/audit-logs
+Audit history
+17.9 Authority API
+Method
+Endpoint
+Purpose
+GET
+/authority/seller-reviews
+Seller verification queue
+POST
+/authority/sellers/:id/review
+Submit verification decision
+GET
+/authority/product-reviews
+Product moderation queue
+POST
+/authority/products/:id/review
+Approve/reject with reason
+GET
+/authority/reports
+Reported product/store list
+GET
+/authority/complaints
+Complaint queue
+POST
+/authority/complaints/:id/resolve
+Resolve/escalate complaint
+17.10 Payment Webhook API
+Method
+Endpoint
+Purpose
+POST
+/webhooks/payments/:provider
+Receive provider callback/IPN; verify signature/reference
+POST
+/webhooks/couriers/:provider
+Receive shipment/COD status if provider supports
+POST
+/webhooks/meta
+Only if a specific approved Meta webhook is implemented
+Webhook endpoints আলাদা middleware, raw body/signature validation, replay protection এবং idempotent event handling ব্যবহার করবে।
+18. Security, Privacy ও Compliance
+18.1 Application Security
+HTTPS/TLS everywhere; HSTS and secure headers।
+Password hashing Argon2id বা appropriately configured bcrypt।
+Access token short-lived; refresh token rotation and reuse detection।
+HttpOnly, Secure, SameSite cookie; cookie-based auth হলে CSRF protection।
+Login, OTP, password reset, search এবং public forms-এ rate limit।
+Input validation with Zod; output encoding এবং HTML sanitization।
+MongoDB query/operator injection prevention; never accept raw Mongo query from client।
+File upload MIME sniffing, file size limit, random storage key, malware scanning where available।
+Secrets environment variable-এর বাইরে managed secret store-এ রাখা উত্তম; repository-তে secret commit নয়।
+Admin/finance action-এ MFA এবং step-up verification।
+18.2 Privacy & Data Protection
+শুধু প্রয়োজনীয় personal data collect করতে হবে।
+Buyer address/phone Seller-কে শুধু তার order fulfillment-এর জন্য প্রয়োজনীয় সময় ও scope-এ দেখাতে হবে।
+NID, bank/MFS payout details এবং identity documents restricted encrypted storage-এ রাখতে হবে।
+Data access, correction, deletion request এবং retention policy তৈরি করতে হবে।
+Analytics/pixel integration-এ consent, privacy notice এবং applicable Bangladesh law/policy বিবেচনা করতে হবে।
+Third-party provider-কে data পাঠানোর আগে purpose, data fields এবং contract review করতে হবে।
+18.3 Marketplace Policy & Legal Review
+Launch-এর আগে বাংলাদেশে প্রযোজ্য e-commerce, consumer protection, digital commerce, payment, tax/VAT, data protection এবং business registration requirements স্থানীয় qualified legal/accounting advisor দিয়ে যাচাই করতে হবে। এই document আইনি পরামর্শ নয়।
+Seller Agreement এবং marketplace commission terms।
+Buyer Terms of Service এবং Privacy Policy।
+Return, refund, cancellation, warranty এবং complaint policy।
+Prohibited/restricted product policy এবং takedown process।
+Product authenticity, trademark/image rights এবং seller content authorization declaration।
+Payment collection, merchant-of-record, COD remittance এবং seller payout-এর contractual structure।
+Tax/VAT invoice responsibility এবং record retention।
+19. Non-Functional Requirements
+Category
+Requirement / Target
+Availability
+Production target 99.5% monthly for MVP, excluding planned maintenance (target to be reviewed)
+Performance
+Public pages optimized for Core Web Vitals; API p95 target to be measured and tuned
+Scalability
+Horizontal API/worker scaling; queue-based heavy tasks
+Reliability
+Retries, idempotency, dead-letter handling for background jobs
+Security
+OWASP-aligned controls, least privilege, secure secrets, audit logs
+Accessibility
+Keyboard navigation, semantic HTML, contrast and form labels
+Responsive
+Mobile-first; common Android browsers and desktop browsers
+Maintainability
+TypeScript, linting, tests, modular code, OpenAPI docs
+Localization
+Bangla and English-ready content structure; BDT formatting
+Observability
+Centralized logs, error tracking, metrics, health checks
+Backup
+Automated database backups and periodic restore drill
+Data integrity
+Atomic stock operations, immutable financial ledger, verified webhooks
+19.1 Performance Design
+Next.js Server Components and ISR for public content where suitable।
+Image CDN, responsive sizes, WebP/AVIF, lazy loading।
+Database query projections, pagination, indexes এবং slow query monitoring।
+Redis caching only for safe cacheable data; invalidate on product/price/stock changes।
+Do not cache private buyer/seller data in shared public cache।
+Use worker queue for image processing, imports, email, reports and sitemap jobs।
+19.2 Scalability Strategy
+API stateless রাখবে; session/token state shared store-এ থাকলে Redis/DB ব্যবহার করবে।
+Web, API এবং worker independently scale করা যাবে।
+MongoDB connection pooling এবং transaction limits বিবেচনা করবে।
+High-volume search প্রয়োজন হলে dedicated search engine যোগ করবে।
+Product images object storage/CDN-এ রাখবে; MongoDB-তে binary image নয়, metadata/URL রাখবে।
+20. Error Handling, Logging ও Observability
+প্রতিটি request-এ correlation/request ID।
+Structured JSON logs: timestamp, level, service, requestId, actorId (safe), route, duration, errorCode।
+Password, access token, payment secret, full card data বা sensitive document logs-এ যাবে না।
+Health endpoints: /health/live এবং /health/ready।
+Worker job failure retry policy এবং dead-letter queue থাকবে।
+Sentry-তে frontend/backend exceptions; alert severity অনুযায়ী notification।
+Business event audit log এবং technical application log আলাদা রাখতে হবে।
+Dashboard-এ payment mismatch, import failures, queue backlog, webhook errors monitor করতে হবে।
+21. Testing & Quality Assurance
+21.1 Test Types
+Test Type
+Scope
+Unit tests
+Commission calculation, pricing, coupon, permission, stock rules
+Integration tests
+MongoDB models, API, payment adapter, Meta adapter, worker queue
+API tests
+Auth, validation, authorization, pagination, error response
+E2E tests
+Seller onboarding → product approval → buyer checkout → delivery
+Security tests
+IDOR, privilege escalation, injection, XSS, CSRF, upload validation
+Performance tests
+Product listing, search, checkout, seller dashboard, traffic spikes
+Payment tests
+Success, failure, duplicate callback, timeout, wrong amount, refund
+Recovery tests
+DB restore, queue retry, worker restart, webhook replay
+21.2 Critical Acceptance Scenarios
+একজন নতুন Seller registration ও verification শেষ না করে product publish করতে পারবে না।
+Seller product submit করলে Authority queue-তে যাবে; approve না হওয়া পর্যন্ত public product listing-এ থাকবে না।
+Seller A API-তে Seller B-এর product/order ID পাঠালে 403/404 response পাবে; data leak হবে না।
+Buyer একই cart-এ Seller A ও Seller B-এর product নিয়ে single checkout করতে পারবে।
+একটি Parent Order-এর জন্য seller-wise SellerOrder তৈরি হবে এবং seller data isolate থাকবে।
+Payment webhook duplicate হলেও একবারই order paid/commission event হবে।
+Stock 1 থাকলে concurrent checkout-এ একটির বেশি successful reservation হবে না।
+Product price update হলেও existing order snapshot-এর price অপরিবর্তিত থাকবে।
+Refund হলে relevant seller payable এবং commission ledger adjustment তৈরি হবে।
+Meta import permission না থাকলে graceful error ও CSV/manual fallback থাকবে।
+Product image process fail করলে original asset অক্ষত থাকবে এবং job retry/failed state দেখাবে।
+Pending/suspended product sitemap ও public search থেকে বাদ থাকবে।
+22. Deployment, DevOps ও Backup
+22.1 Environment Strategy
+Environment
+Purpose
+Data/Secrets
+Local
+Developer machine
+Mock/test credentials; local DB or isolated dev DB
+Development
+Team integration
+Non-production Meta/payment apps and test data
+Staging
+Pre-production QA/UAT
+Production-like config, test gateway, sanitized data
+Production
+Live marketplace
+Production credentials, strict access, monitoring, backups
+22.2 Deployment Components
+Next.js frontend: Vercel বা equivalent platform।
+Express API: AWS/DigitalOcean container/VM deployment with HTTPS reverse proxy।
+Worker: separate process/container; independent scaling।
+MongoDB: MongoDB Atlas production cluster; private networking/IP allowlist where practical।
+Redis: managed Redis service with authentication/TLS।
+Images: Cloudinary বা S3-compatible object storage + CDN।
+CI/CD: GitHub Actions; lint, typecheck, unit tests, build, staging deploy, approval-based production deploy।
+22.3 Backup & Disaster Recovery
+MongoDB automated backup/PITR capability plan নির্বাচন।
+Backup retention period legal/business need অনুযায়ী define।
+Quarterly বা scheduled restore drill।
+Object storage versioning/lifecycle rules।
+Secrets backup/recovery process documented; secrets repository-তে নয়।
+RPO/RTO business owner-এর সঙ্গে agree করতে হবে।
+22.4 Release Strategy
+Feature branch → Pull Request → Code review।
+CI: lint, typecheck, unit tests, security checks, build।
+Staging deploy এবং QA/UAT।
+Database migration/backward compatibility check।
+Production deploy with rollback plan।
+Post-deploy smoke test এবং monitoring।
+23. Delivery Roadmap & Milestones
+Phase
+Estimated Duration
+Deliverables
+Exit Criteria
+0. Discovery & UX
+1–2 weeks
+Final workflows, wireframes, design system, API contracts, policy decisions
+Stakeholder sign-off
+1. Foundation
+2 weeks
+Monorepo, CI, DB, auth, RBAC, base UI
+Secure login and role route access
+2. Seller & Catalog
+2–3 weeks
+Seller onboarding, store, product CRUD, categories, media
+Seller can submit product
+3. Moderation & Storefront
+2 weeks
+Approval queue, public product pages, search, SEO basics
+Approved product publicly visible
+4. Cart & Order
+2–3 weeks
+Cart, quote, multi-seller parent/suborders, stock reservation
+Buyer can place valid order
+5. Payment & Finance
+2–3 weeks
+COD, online gateway, commission, ledger, reconciliation
+Verified payment and financial tests pass
+6. Seller Fulfillment
+1–2 weeks
+Dispatch, tracking, status, buyer notifications
+Seller completes fulfillment
+7. Meta Import
+2–4 weeks+
+OAuth, catalog import, job progress, CSV fallback
+Authorized catalog import passes; subject to Meta approval
+8. Admin & Marketing
+2–3 weeks
+Admin analytics, campaigns, coupons, CMS, audit
+Operations can manage platform
+9. Hardening & Launch
+2–3 weeks
+Security, performance, UAT, backup, monitoring, production
+Launch checklist signed off
+Timeline indicative এবং একজন developer-এর availability, UI design complexity, gateway/courier/Meta approvals, testing depth ও content readiness অনুযায়ী পরিবর্তিত হবে। Meta App Review এবং merchant approval development timeline-এর বাইরে dependency হতে পারে।
+23.1 MVP Release Recommendation
+প্রথম public launch-এর জন্য Seller onboarding, manual product upload, manual approval, public storefront, buyer checkout, COD, একটি verified online gateway, seller order fulfillment, commission ledger এবং basic SEO সম্পন্ন করো। Meta Catalog Import-কে parallel/next milestone-এ রাখো, যাতে Meta approval delay-এর কারণে core marketplace launch আটকে না যায়।
+23.2 Post-MVP Releases
+Release 1.1: Meta Catalog Import, CSV bulk import, seller analytics।
+Release 1.2: Courier API integration, automated tracking, COD reconciliation।
+Release 1.3: Advanced campaigns, affiliate/referral, abandoned cart।
+Release 1.4: AI-assisted product content, recommendation, advanced search।
+Release 2.0: Mobile apps, multi-language expansion, advanced finance and seller subscription।
+24. Risks, Dependencies ও Open Decisions
+24.1 Key Risks
+Risk
+Impact
+Mitigation
+Meta API permission/App Review delay
+Facebook import launch delay
+CSV/manual import fallback; verify API capability early
+Gateway merchant approval unavailable
+Online payment unavailable
+Start application early; COD fallback; alternate approved provider
+COD failed delivery / fake orders
+High operational cost
+Phone verification, confirmation, risk flags, seller/courier metrics
+Seller product quality / counterfeit
+Trust and legal risk
+Manual moderation, seller agreement, takedown and complaint workflow
+Seller late dispatch
+Buyer dissatisfaction
+Dispatch SLA, reminders, seller score, escalation
+Payment reconciliation mismatch
+Financial loss
+Immutable ledger, daily reconciliation, exception queue
+Product image rights issue
+Legal/takedown risk
+Seller declaration, rights policy, complaint process
+Stock oversell
+Order cancellation
+Atomic stock reservation and expiry
+Data breach / IDOR
+Sensitive data exposure
+RBAC, ownership checks, security tests, monitoring
+Scope creep
+Delayed launch
+MVP scope lock and formal change request
+24.2 Open Business Decisions
+নিচের বিষয়গুলো এখনো চূড়ান্ত নয়। Implementation-এর আগে Product Owner/Business Owner অনুমোদন দেবেন।
+Decision
+Options / Question
+Recommended Baseline
+Seller settlement timing
+After delivery/return window, weekly, monthly, manual?
+MVP: manual review; later scheduled cycle
+Courier model
+Company courier, seller courier, or both?
+Both, with provider/manual shipment records
+Discount funding
+Platform, seller, shared?
+Each promotion must explicitly define funder and ledger allocation
+Meta import scope
+Catalog only, posts, or both?
+Official accessible catalog first; CSV/manual fallback
+Commission base
+Product subtotal only or include shipping/discount/tax?
+Define contractually; snapshot rule per order
+Return window
+Category-wise number of days?
+Policy table configurable by category
+Shipping pricing
+Flat, zone, weight, seller-defined, courier quote?
+MVP configurable zone/flat rate; later courier quote
+Seller verification
+Individual vs business document requirements?
+Legal/operations policy before onboarding
+Online payment merchant structure
+Platform collects and settles, or approved split?
+Gateway/merchant agreement must decide
+COD money flow
+Courier remits to platform or seller?
+Contract-specific; ledger/reconciliation mandatory
+Guest checkout
+Allowed or account required?
+Optional guest checkout with phone verification policy
+24.3 Dependencies
+Meta Developer App, business/page access, approved permissions এবং app review।
+Online payment gateway merchant account, credentials, production approval এবং webhook setup।
+Courier provider agreement/API credentials বা manual fulfillment process।
+Company brand assets: logo, watermark, templates, colors, fonts।
+Seller terms, buyer terms, privacy/return/shipping policy এবং moderation policy।
+Product categories, attributes, prohibited item list এবং commission schedule।
+SMS/email provider and sender approval, if required।
+25. Acceptance Criteria & Launch Checklist
+25.1 MVP Acceptance Criteria
+Buyer responsive storefront থেকে approved product browse/search করতে পারে।
+Seller application submit ও approval status দেখতে পারে।
+Seller product create/import করে approval-এর জন্য submit করতে পারে।
+Authority product approve/reject করতে পারে এবং rejection reason seller দেখতে পায়।
+Approved product metadata, canonical, sitemap ও structured data সঠিকভাবে প্রকাশিত হয়।
+Buyer multi-seller cart থেকে একটি checkout করতে পারে।
+Backend parent order এবং seller-wise suborders তৈরি করে।
+COD এবং verified online payment flow end-to-end test pass করে।
+Seller নিজের suborder update করতে পারে; অন্য seller-এর data access করতে পারে না।
+Commission rate order-time snapshot হয় এবং ledger entry তৈরি হয়।
+Image original এবং processed version পৃথক থাকে; watermark server-side apply হয়।
+Admin audit logs, order/payment search এবং reconciliation workflow ব্যবহার করতে পারে।
+Backup, monitoring, alert এবং rollback plan validated হয়।
+25.2 Launch Checklist
+☐ Domain, HTTPS, DNS এবং production environment configured
+☐ Privacy Policy, Terms, Return/Refund, Shipping Policy published
+☐ Seller Agreement এবং Commission Policy approved
+☐ Admin/Authority accounts secured with MFA
+☐ Role and ownership authorization tests passed
+☐ Payment gateway production approval and webhook verification passed
+☐ COD courier/manual settlement process documented
+☐ Product approval and prohibited product policy active
+☐ Meta integration permissions verified or fallback import enabled
+☐ Product images, watermark, logo and templates approved
+☐ SEO metadata, sitemap, robots, canonical and schema validated
+☐ Google Search Console and analytics configured
+☐ Email/SMS templates and notification delivery tested
+☐ Database backup and restore drill completed
+☐ Error monitoring, uptime checks and alerts active
+☐ Load/performance and security testing completed
+☐ Customer support escalation and incident process documented
+☐ Rollback and emergency product/payment disable procedure documented
+Appendix A — Example Business Calculations
+A.1 Commission Example
+ধরা যাক Seller-এর eligible product subtotal ৳2,500 এবং commission rate 10%। Commission = ৳250; seller gross payable = ৳2,250। Shipping, gateway fee, discount funding, tax এবং refund adjustment আলাদা ledger line হিসেবে হিসাব হবে।
+A.2 Shared Cart Example
+Line
+Amount
+Seller A item 1
+৳1,200
+Seller A item 2
+৳500
+Seller B item 1
+৳900
+Product subtotal
+৳2,600
+Shipping (illustrative)
+৳120
+Platform coupon
+-৳100
+Buyer payable
+৳2,620
+Platform coupon হলে ৳100 platform-funded discount হিসেবে ledger-এ allocate হবে। Seller-funded discount হলে সংশ্লিষ্ট SellerOrder এবং seller payable-এ তার প্রভাব পড়বে। Coupon apply করার আগে eligibility ও funding source validate করতে হবে।
+Appendix B — Suggested Status Dictionaries
+Domain
+Suggested Statuses
+User
+pending, active, suspended, blocked
+Seller verification
+pending, under_review, verified, rejected, needs_information
+Product moderation
+draft, pending, approved, rejected, suspended
+Product publication
+unpublished, published, archived
+Import job
+queued, processing, completed, completed_with_errors, failed, cancelled
+Payment
+initiated, pending, success, failed, partially_refunded, refunded
+Parent order
+pending, confirmed, partially_fulfilled, fulfilled, cancelled, completed
+Seller fulfillment
+pending_confirmation, confirmed, processing, packed, shipped, delivered, delivery_failed, cancelled, returned
+Payout
+requested, under_review, approved, processing, paid, failed, rejected, reversed
+Return
+requested, under_review, approved, rejected, pickup_pending, received, refunded, closed
+Appendix C — Glossary
+Term
+Meaning
+Marketplace Operator
+যে কোম্পানি platform পরিচালনা করে
+Seller / Vendor
+যে ব্যক্তি বা প্রতিষ্ঠান পণ্য তালিকাভুক্ত ও সরবরাহ করে
+Buyer
+যে customer পণ্য ক্রয় করে
+Authority / Moderator
+যে moderation, verification ও complaint review করে
+Parent Order
+Buyer-এর একক checkout-এর মূল order record
+SellerOrder / Suborder
+Parent Order-এর seller-specific fulfillment অংশ
+GMV
+Gross Merchandise Value; নির্ধারিত reporting rule অনুযায়ী product sales value
+Commission
+Marketplace-এর percentage-based revenue share
+Ledger
+Financial debit/credit event-এর append-only record
+Settlement
+Collected funds reconcile করে seller payable নিষ্পত্তি
+Webhook
+External provider থেকে backend-এ server-to-server event
+Idempotency
+একই request/event একাধিকবার এলেও একবারের বেশি effect না হওয়া
+ISR
+Incremental Static Regeneration in Next.js
+RBAC
+Role-Based Access Control
+Meta Catalog
+Meta commerce ecosystem-এ থাকা product catalog
+Appendix D — Project Owner-এর Final Sign-off
+এই document-এর scope, business rules, MVP requirements এবং open decisions review করে অনুমোদন দিতে হবে। অনুমোদনের পর বড় scope change হলে Change Request তৈরি করে impact, estimate এবং priority অনুমোদন করতে হবে।
+Approval
+Name / Signature
+Date
+Project Owner
+Technical Lead
+Business / Operations Representative
+QA / Release Owner
