@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -85,7 +85,7 @@ export default function NewProductSEOAssistantPage() {
       </div>
 
       {submitted ? (
-        <div className="bg-white p-10 rounded-xl border border-[#E6EFE2] text-center space-y-4 shadow-sm">
+        <div className="bg-white p-10 rounded-md border border-[#E6EFE2] text-center space-y-4 shadow-sm">
           <div className="w-16 h-16 rounded-full bg-[#F1F7ED] text-[#2F6F4E] flex items-center justify-center mx-auto border border-[#2F6F4E]/30 shadow-xs">
             <CheckCircle2 className="w-8 h-8" />
           </div>
@@ -105,7 +105,7 @@ export default function NewProductSEOAssistantPage() {
       ) : (
         <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Left Form: Product Fields (7 cols) */}
-          <div className="lg:col-span-7 bg-white p-6 sm:p-8 rounded-xl border border-[#E6EFE2] space-y-5 shadow-xs">
+          <div className="lg:col-span-7 bg-white p-6 sm:p-8 rounded-md border border-[#E6EFE2] space-y-5 shadow-xs">
             <h3 className="font-black text-[#0F2F2A] text-lg">Product Details & Catalog Listing</h3>
 
             {/* Product Title */}
@@ -225,7 +225,7 @@ export default function NewProductSEOAssistantPage() {
                   value={imageAlt}
                   onChange={(e) => setImageAlt(e.target.value)}
                   placeholder="e.g. Ultra 2 Titanium Smartwatch front view with sport band"
-                  className="w-full bg-white border border-[#E6EFE2] rounded-xl px-3.5 py-2 text-xs text-[#0F2F2A] focus:outline-none focus:border-[#2F6F4E]"
+                  className="w-full bg-white border border-[#E6EFE2] rounded-md px-3.5 py-2 text-xs text-[#0F2F2A] focus:outline-none focus:border-[#2F6F4E]"
                 />
               </div>
             </div>
@@ -240,7 +240,7 @@ export default function NewProductSEOAssistantPage() {
 
           {/* Right Preview: Live Google Snippet (5 cols) */}
           <div className="lg:col-span-5 space-y-5">
-            <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#E6EFE2] space-y-4 shadow-xs">
+            <div className="bg-white p-6 sm:p-8 rounded-md border border-[#E6EFE2] space-y-4 shadow-xs">
               <div className="flex items-center gap-2 text-sm font-black text-[#0F2F2A]">
                 <Globe className="w-4 h-4 text-[#2F6F4E]" />
                 <span>Google SERP Live Snippet</span>

@@ -36,19 +36,19 @@ export default function AdminFinancePage() {
 
       {/* Summary KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white p-5 rounded-xl border border-[#E6EFE2] shadow-xs">
+        <div className="bg-white p-5 rounded-md border border-[#E6EFE2] shadow-xs">
           <span className="text-xs font-medium text-slate-500">Platform Commission Yield</span>
           <div className="text-2xl font-bold text-[#0F2F2A] mt-2">10.0%</div>
           <p className="text-[11px] text-[#2F6F4E] font-medium mt-1">Global Base Rate for All Categories</p>
         </div>
 
-        <div className="bg-white p-5 rounded-xl border border-[#E6EFE2] shadow-xs">
+        <div className="bg-white p-5 rounded-md border border-[#E6EFE2] shadow-xs">
           <span className="text-xs font-medium text-slate-500">Unsettled In-Transit COD</span>
           <div className="text-2xl font-bold text-[#D9A441] mt-2">৳ 145,200</div>
           <p className="text-[11px] text-slate-400 mt-1">Steadfast & Pathao Carrier Clearing</p>
         </div>
 
-        <div className="bg-white p-5 rounded-xl border border-[#E6EFE2] shadow-xs">
+        <div className="bg-white p-5 rounded-md border border-[#E6EFE2] shadow-xs">
           <span className="text-xs font-medium text-slate-500">Net Platform Commission</span>
           <div className="text-2xl font-bold text-[#2F6F4E] mt-2">৳ 48,250</div>
           <p className="text-[11px] text-[#2F6F4E] font-medium mt-1">100% Reconciled Net Revenue</p>
@@ -56,7 +56,7 @@ export default function AdminFinancePage() {
       </div>
 
       {/* Real-time Double-entry Ledger Stream */}
-      <div className="bg-white p-5 rounded-xl border border-[#E6EFE2] space-y-4 shadow-xs">
+      <div className="bg-white p-5 rounded-md border border-[#E6EFE2] space-y-4 shadow-xs">
         <div className="flex items-center justify-between pb-2 border-b border-[#E6EFE2]">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-[#2F6F4E]" />

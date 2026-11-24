@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { 
@@ -28,7 +28,7 @@ export default function FacebookImportPage() {
   return (
     <div className="space-y-6">
       {/* Banner */}
-      <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#E6EFE2] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shadow-xs">
+      <div className="bg-white p-6 sm:p-8 rounded-md border border-[#E6EFE2] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shadow-xs">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="p-2 rounded-lg bg-[#F1F7ED] text-[#2F6F4E]">
@@ -62,7 +62,7 @@ export default function FacebookImportPage() {
       )}
 
       {/* Connected Account Card */}
-      <div className="bg-white p-6 rounded-xl border border-[#E6EFE2] flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xs card-hover-effect">
+      <div className="bg-white p-6 rounded-md border border-[#E6EFE2] flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xs card-hover-effect">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-lg bg-[#2F6F4E] flex items-center justify-center text-white shrink-0 shadow-xs">
             <Share2 className="w-6 h-6" />
@@ -87,7 +87,7 @@ export default function FacebookImportPage() {
       </div>
 
       {/* Sync Job Progress & Status (SRS 9.6) */}
-      <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#E6EFE2] space-y-4 shadow-xs">
+      <div className="bg-white p-6 sm:p-8 rounded-md border border-[#E6EFE2] space-y-4 shadow-xs">
         <div className="flex items-center justify-between">
           <h3 className="font-black text-[#0F2F2A] text-base">Ingestion Job Status ({activeJob.jobId})</h3>
           <span className="text-xs font-mono font-black text-[#2F6F4E] bg-[#F1F7ED] px-3 py-1 rounded-full border border-[#2F6F4E]/25">
@@ -146,7 +146,7 @@ export default function FacebookImportPage() {
       </div>
 
       {/* CSV Fallback Option (SRS 9.2) */}
-      <div className="bg-white p-6 rounded-xl border border-[#E6EFE2] flex items-center justify-between shadow-xs card-hover-effect">
+      <div className="bg-white p-6 rounded-md border border-[#E6EFE2] flex items-center justify-between shadow-xs card-hover-effect">
         <div>
           <h4 className="font-black text-[#0F2F2A] text-sm flex items-center gap-2">
             <FileSpreadsheet className="w-4 h-4 text-[#2F6F4E]" />

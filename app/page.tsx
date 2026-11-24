@@ -152,7 +152,7 @@ export default function HomePage() {
             </span>
           </Link>
 
-          {/* Centered Pill Search Bar */}
+          {/* Centered Sleek Search Bar */}
           <div className="flex-1 max-w-xl mx-auto relative hidden md:block">
             <Search className="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
@@ -160,7 +160,7 @@ export default function HomePage() {
               value={searchKeyword}
               onChange={(e) => setSearchKeyword(e.target.value)}
               placeholder="Search product, style, category..."
-              className="w-full bg-[#F4F5F7] border border-transparent hover:border-slate-300 focus:border-[#0F2F2A] focus:bg-white rounded-full pl-11 pr-10 py-2.5 text-xs text-[#0F2F2A] placeholder:text-slate-400 focus:outline-none transition shadow-2xs"
+              className="w-full bg-[#F4F5F7] border border-slate-200/80 hover:border-slate-300 focus:border-[#0F2F2A] focus:bg-white rounded-lg pl-11 pr-10 py-2.5 text-xs text-[#0F2F2A] placeholder:text-slate-400 focus:outline-none transition shadow-2xs"
             />
             {searchKeyword && (
               <button 
@@ -176,7 +176,7 @@ export default function HomePage() {
           {/* Right Action Icons: Wishlist, Cart Drawer, Profile */}
           <div className="flex items-center gap-3 shrink-0">
             {/* Wishlist Pill */}
-            <div className="relative hidden sm:flex items-center justify-center w-9 h-9 rounded-full bg-[#F4F5F7] hover:bg-[#EAEAEA] text-[#0F2F2A] transition cursor-pointer">
+            <div className="relative hidden sm:flex items-center justify-center w-9 h-9 rounded-lg bg-[#F4F5F7] hover:bg-[#EAEAEA] text-[#0F2F2A] transition cursor-pointer">
               <Heart className={`w-4 h-4 ${wishlist.length > 0 ? "fill-rose-500 text-rose-500" : "text-[#0F2F2A]"}`} />
               {wishlist.length > 0 && (
                 <span className="absolute -top-1 -right-1 bg-rose-500 text-white font-bold text-[9px] w-4 h-4 rounded-full flex items-center justify-center">
@@ -188,7 +188,7 @@ export default function HomePage() {
             {/* Shopping Bag Trigger */}
             <button 
               onClick={() => setCartOpen(true)}
-              className="flex items-center gap-2 bg-[#F4F5F7] hover:bg-[#EAEAEA] text-[#0F2F2A] px-3.5 py-2 rounded-full transition btn-press-effect"
+              className="flex items-center gap-2 bg-[#F4F5F7] hover:bg-[#EAEAEA] text-[#0F2F2A] px-3.5 py-2 rounded-lg transition btn-press-effect"
               aria-label="View Shopping Bag"
             >
               <div className="relative">
@@ -203,7 +203,7 @@ export default function HomePage() {
             </button>
 
             {/* User Profile Avatar */}
-            <div className="w-9 h-9 rounded-full overflow-hidden bg-slate-200 border border-slate-300 cursor-pointer shrink-0">
+            <div className="w-9 h-9 rounded-lg overflow-hidden bg-slate-200 border border-slate-300 cursor-pointer shrink-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80" 
@@ -319,17 +319,90 @@ export default function HomePage() {
         </div>
       )}
 
+      {/* 2.5 CINEMATIC VIDEO HERO SECTION */}
+      <section className="relative w-full overflow-hidden bg-black text-white min-h-[580px] sm:min-h-[660px] lg:h-[82vh] max-h-[840px] flex items-center">
+        {/* Full-Bleed Ambient Hero Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none filter brightness-[0.80] contrast-[1.08] scale-[1.02]"
+        >
+          <source src="/Video-Assets/hero.mp4" type="video/mp4" />
+        </video>
+
+        {/* Sophisticated Dual Gradient & Vignette Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/60 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(0,0,0,0.45)_100%)] pointer-events-none" />
+
+        {/* Hero Content Canvas */}
+        <div className="max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 relative z-10 w-full py-16 sm:py-24 flex flex-col justify-between h-full">
+          {/* Central Typography & Action Group */}
+          <div className="my-auto pt-6 sm:pt-10 max-w-3xl space-y-5">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white uppercase leading-[1.05] drop-shadow-md">
+              Refined Style.<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-emerald-300">
+                Effortless Living.
+              </span>
+            </h1>
+
+            <p className="text-xs sm:text-base text-white/80 max-w-xl font-normal leading-relaxed">
+              Discover curated luxury fashion, handwoven silks, and artisan leather from verified social merchants across Bangladesh. Built with certified quality inspection.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-3 pt-3">
+              <a
+                href="#new-collection"
+                className="inline-flex items-center gap-2 bg-white hover:bg-emerald-400 hover:text-black text-[#0F2F2A] text-xs font-bold px-7 py-3.5 rounded-md transition-all duration-200 shadow-xl tracking-wider uppercase btn-press-effect"
+              >
+                <span>SHOP NEW DROPS</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
+
+              <a
+                href="#summer-arrival"
+                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white backdrop-blur-xl border border-white/25 text-xs font-semibold px-6 py-3.5 rounded-md transition-all duration-200 tracking-wider uppercase"
+              >
+                <span>EXPLORE LOOKBOOK</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Bottom Luxury Features Strip */}
+          <div className="pt-8 border-t border-white/15 grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+            <div className="space-y-0.5">
+              <p className="text-[10px] uppercase tracking-wider text-emerald-400 font-bold">01 / Authenticity</p>
+              <p className="font-semibold text-white/90">100% Verified Merchants</p>
+            </div>
+            <div className="space-y-0.5">
+              <p className="text-[10px] uppercase tracking-wider text-emerald-400 font-bold">02 / Assurance</p>
+              <p className="font-semibold text-white/90">Inspect Before Payment</p>
+            </div>
+            <div className="space-y-0.5 hidden md:block">
+              <p className="text-[10px] uppercase tracking-wider text-emerald-400 font-bold">03 / Logistics</p>
+              <p className="font-semibold text-white/90">Fast Nationwide Shipping</p>
+            </div>
+            <div className="space-y-0.5 hidden md:block text-right">
+              <p className="text-[10px] uppercase tracking-wider text-white/60 font-medium">Scroll to explore</p>
+              <p className="font-semibold text-white/90">Summer Collections ↓</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 3. HERO SECTION (High-End Bento Grid Layout) */}
-      <section className="max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-6 pb-10 w-full">
+      <section id="summer-arrival" className="max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-10 pb-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
           {/* Main Top-Left Hero Card (8 Cols / 2-Row Height) */}
-          <div className="lg:col-span-8 bg-[#C6D8D5] rounded-2xl p-6 sm:p-10 relative overflow-hidden flex flex-col justify-between min-h-[460px] sm:min-h-[500px] shadow-2xs group">
+          <div className="lg:col-span-8 bg-[#C6D8D5] rounded-xl p-6 sm:p-10 relative overflow-hidden flex flex-col justify-between min-h-[460px] sm:min-h-[500px] shadow-2xs group">
             {/* Top Bar inside Card */}
             <div className="relative z-10 flex items-start justify-between gap-4">
               <div className="max-w-md">
-                <h1 className="text-3xl sm:text-5xl lg:text-5xl font-normal text-[#0F2F2A] tracking-tight leading-[1.1] font-serif sm:font-sans">
+                <h2 className="text-3xl sm:text-5xl lg:text-5xl font-normal text-[#0F2F2A] tracking-tight leading-[1.1] font-serif sm:font-sans">
                   Summer<br />Arrival of<br />Outfit
-                </h1>
+                </h2>
                 <p className="mt-4 text-xs sm:text-sm text-slate-700 font-normal leading-relaxed max-w-xs">
                   Discover quality fashion that reflects your personality. Made with fine fabrics and timeless craft.
                 </p>
@@ -337,7 +410,7 @@ export default function HomePage() {
                 <div className="mt-6">
                   <a
                     href="#new-collection"
-                    className="inline-flex items-center gap-2 bg-[#0F2F2A] hover:bg-[#1B4332] text-white text-xs font-bold px-6 py-3 rounded-full transition shadow-sm btn-press-effect tracking-wider"
+                    className="inline-flex items-center gap-2 bg-[#0F2F2A] hover:bg-[#1B4332] text-white text-xs font-bold px-6 py-3 rounded-md transition shadow-sm btn-press-effect tracking-wider"
                   >
                     <span>EXPLORE PRODUCT</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -359,20 +432,20 @@ export default function HomePage() {
               <img
                 src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80"
                 alt="Summer Arrival of Outfit Models"
-                className="w-full h-full object-cover object-top opacity-95 group-hover:scale-[1.02] transition-transform duration-500 rounded-tl-3xl"
+                className="w-full h-full object-cover object-top opacity-95 group-hover:scale-[1.02] transition-transform duration-500 rounded-tl-xl"
               />
             </div>
           </div>
 
           {/* Top-Right Tall Card (4 Cols) */}
-          <div className="lg:col-span-4 bg-[#E8E3DC] rounded-2xl p-6 sm:p-8 relative overflow-hidden flex flex-col justify-between min-h-[460px] sm:min-h-[500px] shadow-2xs group">
+          <div className="lg:col-span-4 bg-[#E8E3DC] rounded-xl p-6 sm:p-8 relative overflow-hidden flex flex-col justify-between min-h-[460px] sm:min-h-[500px] shadow-2xs group">
             <div className="flex items-start justify-between z-10">
               <h2 className="text-2xl font-normal tracking-tight text-[#0F2F2A] font-serif sm:font-sans">
                 Fashion &<br />Style
               </h2>
               <Link 
                 href="/products/pure-silk-organza-tiered-camisole-top"
-                className="w-9 h-9 rounded-full bg-white/70 hover:bg-white flex items-center justify-center text-[#0F2F2A] transition shadow-xs"
+                className="w-8 h-8 rounded-md bg-white/80 hover:bg-white flex items-center justify-center text-[#0F2F2A] transition shadow-xs"
                 aria-label="View Fashion & Style"
               >
                 <ArrowUpRight className="w-4 h-4" />
@@ -380,7 +453,7 @@ export default function HomePage() {
             </div>
 
             {/* Model Seated on Cushions */}
-            <div className="w-full h-72 sm:h-80 relative mt-4 overflow-hidden rounded-xl">
+            <div className="w-full h-72 sm:h-80 relative mt-4 overflow-hidden rounded-lg">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80"
@@ -391,14 +464,14 @@ export default function HomePage() {
           </div>
 
           {/* Bottom-Left Card: Trendy Sunglass (6 Cols) */}
-          <div className="lg:col-span-6 bg-[#D7DED9] rounded-2xl p-6 sm:p-7 relative overflow-hidden flex items-center justify-between min-h-[160px] shadow-2xs group">
+          <div className="lg:col-span-6 bg-[#D7DED9] rounded-xl p-6 sm:p-7 relative overflow-hidden flex items-center justify-between min-h-[160px] shadow-2xs group">
             <div className="z-10 max-w-[200px]">
               <h3 className="text-lg sm:text-xl font-normal tracking-tight text-[#0F2F2A] font-serif sm:font-sans">
                 Trendy<br />Sunglass
               </h3>
               <Link
                 href="/products/polarized-classic-tortoise-sunglasses-uv400"
-                className="mt-4 inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/70 hover:bg-white text-[#0F2F2A] transition shadow-xs"
+                className="mt-4 inline-flex items-center justify-center w-8 h-8 rounded-md bg-white/80 hover:bg-white text-[#0F2F2A] transition shadow-xs"
                 aria-label="View Trendy Sunglasses"
               >
                 <ArrowUpRight className="w-4 h-4" />
@@ -411,20 +484,20 @@ export default function HomePage() {
               <img
                 src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80"
                 alt="Trendy Sunglasses"
-                className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-500"
               />
             </div>
           </div>
 
           {/* Bottom-Right Card: Popular Shoes (6 Cols) */}
-          <div className="lg:col-span-6 bg-[#EFE3D5] rounded-2xl p-6 sm:p-7 relative overflow-hidden flex items-center justify-between min-h-[160px] shadow-2xs group">
+          <div className="lg:col-span-6 bg-[#EFE3D5] rounded-xl p-6 sm:p-7 relative overflow-hidden flex items-center justify-between min-h-[160px] shadow-2xs group">
             <div className="z-10 max-w-[200px]">
               <h3 className="text-lg sm:text-xl font-normal tracking-tight text-[#0F2F2A] font-serif sm:font-sans">
                 Popular<br />Shoes
               </h3>
               <Link
                 href="/products/casual-retro-runner-sneakers"
-                className="mt-4 inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/70 hover:bg-white text-[#0F2F2A] transition shadow-xs"
+                className="mt-4 inline-flex items-center justify-center w-8 h-8 rounded-md bg-white/80 hover:bg-white text-[#0F2F2A] transition shadow-xs"
                 aria-label="View Popular Shoes"
               >
                 <ArrowUpRight className="w-4 h-4" />
@@ -437,7 +510,7 @@ export default function HomePage() {
               <img
                 src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80"
                 alt="Popular Retro Shoes"
-                className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-500"
               />
             </div>
           </div>
@@ -452,16 +525,16 @@ export default function HomePage() {
             BROWSE CATEGORIES
           </h2>
 
-          <div className="flex items-center border border-slate-300 rounded-full p-0.5 text-xs">
+          <div className="flex items-center border border-slate-300 rounded-md p-0.5 text-xs">
             <button
               onClick={() => setGenderFilter("men")}
-              className={`px-3 py-1 rounded-full font-semibold transition ${genderFilter === "men" ? "bg-[#0F2F2A] text-white" : "text-slate-600 hover:text-black"}`}
+              className={`px-3 py-1 rounded-sm font-semibold transition ${genderFilter === "men" ? "bg-[#0F2F2A] text-white" : "text-slate-600 hover:text-black"}`}
             >
               MEN
             </button>
             <button
               onClick={() => setGenderFilter("woman")}
-              className={`px-3 py-1 rounded-full font-semibold transition ${genderFilter === "woman" ? "bg-[#0F2F2A] text-white" : "text-slate-600 hover:text-black"}`}
+              className={`px-3 py-1 rounded-sm font-semibold transition ${genderFilter === "woman" ? "bg-[#0F2F2A] text-white" : "text-slate-600 hover:text-black"}`}
             >
               WOMAN
             </button>
@@ -473,7 +546,7 @@ export default function HomePage() {
           {/* Category 1: Shoes */}
           <Link
             href="/products/casual-retro-runner-sneakers"
-            className="bg-[#F2F3F5] hover:bg-[#EBEEF0] rounded-xl p-5 flex flex-col justify-between items-center h-64 relative group transition shadow-2xs"
+            className="bg-[#F2F3F5] hover:bg-[#EBEEF0] rounded-lg p-5 flex flex-col justify-between items-center h-64 relative group transition shadow-2xs"
           >
             <div className="w-full h-44 flex items-center justify-center overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -484,7 +557,7 @@ export default function HomePage() {
               />
             </div>
             <div className="w-full flex justify-start">
-              <span className="bg-white/90 backdrop-blur-xs text-[#0F2F2A] text-[10px] font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-2xs border border-slate-200/60">
+              <span className="bg-white/90 backdrop-blur-xs text-[#0F2F2A] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-md shadow-2xs border border-slate-200/60">
                 SHOES
               </span>
             </div>
@@ -493,7 +566,7 @@ export default function HomePage() {
           {/* Category 2: Bags */}
           <Link
             href="/products/urban-waterproof-commuter-travel-backpack"
-            className="bg-[#F2F3F5] hover:bg-[#EBEEF0] rounded-xl p-5 flex flex-col justify-between items-center h-64 relative group transition shadow-2xs"
+            className="bg-[#F2F3F5] hover:bg-[#EBEEF0] rounded-lg p-5 flex flex-col justify-between items-center h-64 relative group transition shadow-2xs"
           >
             <div className="w-full h-44 flex items-center justify-center overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -504,7 +577,7 @@ export default function HomePage() {
               />
             </div>
             <div className="w-full flex justify-start">
-              <span className="bg-white/90 backdrop-blur-xs text-[#0F2F2A] text-[10px] font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-2xs border border-slate-200/60">
+              <span className="bg-white/90 backdrop-blur-xs text-[#0F2F2A] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-md shadow-2xs border border-slate-200/60">
                 BAGS
               </span>
             </div>
@@ -513,7 +586,7 @@ export default function HomePage() {
           {/* Category 3: Tote Bags */}
           <Link
             href="/products/artisan-cyan-canvas-shopper-tote"
-            className="bg-[#F2F3F5] hover:bg-[#EBEEF0] rounded-xl p-5 flex flex-col justify-between items-center h-64 relative group transition shadow-2xs"
+            className="bg-[#F2F3F5] hover:bg-[#EBEEF0] rounded-lg p-5 flex flex-col justify-between items-center h-64 relative group transition shadow-2xs"
           >
             <div className="w-full h-44 flex items-center justify-center overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -524,7 +597,7 @@ export default function HomePage() {
               />
             </div>
             <div className="w-full flex justify-start">
-              <span className="bg-white/90 backdrop-blur-xs text-[#0F2F2A] text-[10px] font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-2xs border border-slate-200/60">
+              <span className="bg-white/90 backdrop-blur-xs text-[#0F2F2A] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-md shadow-2xs border border-slate-200/60">
                 BAGS
               </span>
             </div>
@@ -533,18 +606,18 @@ export default function HomePage() {
           {/* Category 4: T-Shirt */}
           <Link
             href="/products/minimalist-matte-black-crewneck-tee"
-            className="bg-[#F2F3F5] hover:bg-[#EBEEF0] rounded-xl p-5 flex flex-col justify-between items-center h-64 relative group transition shadow-2xs"
+            className="bg-[#F2F3F5] hover:bg-[#EBEEF0] rounded-lg p-5 flex flex-col justify-between items-center h-64 relative group transition shadow-2xs"
           >
             <div className="w-full h-44 flex items-center justify-center overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=500&q=80" 
                 alt="T-Shirt Category" 
-                className="w-40 h-40 object-cover rounded-lg group-hover:scale-105 transition duration-300"
+                className="w-40 h-40 object-cover rounded-md group-hover:scale-105 transition duration-300"
               />
             </div>
             <div className="w-full flex justify-start">
-              <span className="bg-white/90 backdrop-blur-xs text-[#0F2F2A] text-[10px] font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-2xs border border-slate-200/60">
+              <span className="bg-white/90 backdrop-blur-xs text-[#0F2F2A] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-md shadow-2xs border border-slate-200/60">
                 T-SHIRT
               </span>
             </div>
@@ -552,314 +625,329 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. NEW COLLECTION (Staggered Bento Grid Matching Reference) */}
-      <section id="new-collection" className="max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-10 w-full">
-        {/* Header & Category Pills */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0F2F2A]">
-            New Collection
-          </h2>
+      {/* 5. NEW COLLECTION (Full-Width Cinematic Video Canvas & Low-Opacity Glass Bento) */}
+      <section id="new-collection" className="relative w-full overflow-hidden bg-black py-16 sm:py-24 my-6 sm:my-10">
+        {/* Full-Width Ambient Runway Background Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none filter brightness-90 contrast-[1.05]"
+        >
+          <source src="/Video-Assets/new-collection.mp4" type="video/mp4" />
+        </video>
 
-          {/* Category Filter Pills */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none text-[11px] font-bold uppercase tracking-wider">
-            {categoryFilters.map(cat => (
-              <button
-                key={cat.id}
-                onClick={() => setSelectedCategory(cat.id)}
-                className={`px-4 py-1.5 rounded-full transition ${
-                  selectedCategory === cat.id 
-                    ? "bg-[#0F2F2A] text-white shadow-xs" 
-                    : "bg-[#F4F5F7] text-slate-600 hover:text-black hover:bg-slate-200"
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-        </div>
+        {/* Minimal Subtle Dark Overlay for Crystal-Clear Video Visibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/30 to-black/65 pointer-events-none" />
 
-        {/* Row 1: Staggered Bento (1 Col + 2 Cols Center Feature + 1 Col) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 mb-8 items-stretch">
-          {/* Card 1: Casual Shoe (3 cols) */}
-          <div className="lg:col-span-3 flex flex-col justify-between group">
-            <div className="bg-[#F4F5F7] rounded-xl p-5 relative overflow-hidden h-[340px] flex items-center justify-center shadow-2xs">
-              <button
-                onClick={() => toggleWishlist(row1CasualShoe.id)}
-                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-xs transition hover:scale-110 z-10"
-                aria-label="Wishlist"
-              >
-                <Heart className={`w-4 h-4 ${wishlist.includes(row1CasualShoe.id) ? "fill-rose-500 text-rose-500" : "text-slate-400 hover:text-rose-500"}`} />
-              </button>
-              
-              <Link href={`/products/${row1CasualShoe.slug}`} className="w-full h-full flex items-center justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={row1CasualShoe.media[0]?.url}
-                  alt={row1CasualShoe.name}
-                  className="max-h-52 object-contain group-hover:scale-105 transition-transform duration-300"
-                />
-              </Link>
-            </div>
+        {/* Centered Content Container */}
+        <div className="max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 relative z-10 space-y-8 sm:space-y-10">
+          {/* Header & Simple Sleek Tabs (No extra text, no sound/pause buttons) */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-white/20">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white font-serif sm:font-sans">
+              New Collection
+            </h2>
 
-            <div className="mt-3 flex items-start justify-between">
-              <div>
-                <h3 className="font-bold text-xs text-[#0F2F2A]">
-                  <Link href={`/products/${row1CasualShoe.slug}`} className="hover:text-[#2F6F4E]">
-                    Casual Shoe
-                  </Link>
-                </h3>
-                <p className="text-xs font-bold text-slate-600 mt-0.5">৳ {row1CasualShoe.price.toLocaleString()}</p>
-              </div>
-
-              <button
-                onClick={() => handleAddToCart({ id: row1CasualShoe.id, name: row1CasualShoe.name, price: row1CasualShoe.price, img: row1CasualShoe.media[0]?.url })}
-                className="text-[11px] font-bold text-[#0F2F2A] hover:text-[#2F6F4E] underline uppercase tracking-wider"
-              >
-                + Bag
-              </button>
+            {/* Simple & Sleek Glass Tabs */}
+            <div className="flex items-center gap-1 sm:gap-1.5 p-1 bg-black/40 backdrop-blur-xl rounded-lg border border-white/15 overflow-x-auto scrollbar-none">
+              {categoryFilters.map(cat => (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={`px-3.5 py-1.5 rounded-md text-xs font-semibold tracking-wider transition-all duration-200 whitespace-nowrap ${
+                    selectedCategory === cat.id
+                      ? "bg-white text-black shadow-md font-bold"
+                      : "text-white/80 hover:text-white hover:bg-white/10"
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
             </div>
           </div>
 
-          {/* Card 2: Center Featured - Gray-Shirt Knit Polo (6 cols) */}
-          <div className="lg:col-span-6 flex flex-col justify-between group">
-            <div className="bg-[#F4F5F7] rounded-xl relative overflow-hidden h-[340px] flex items-center justify-center shadow-2xs">
-              <button
-                onClick={() => toggleWishlist(row1KnitPolo.id)}
-                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-xs transition hover:scale-110 z-10"
-                aria-label="Wishlist"
-              >
-                <Heart className={`w-4 h-4 ${wishlist.includes(row1KnitPolo.id) ? "fill-rose-500 text-rose-500" : "text-slate-400 hover:text-rose-500"}`} />
-              </button>
-
-              <Link href={`/products/${row1KnitPolo.slug}`} className="w-full h-full flex items-center justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={row1KnitPolo.media[0]?.url}
-                  alt={row1KnitPolo.name}
-                  className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
-                />
-              </Link>
-            </div>
-
-            <div className="mt-3 flex items-start justify-between">
-              <div>
-                <h3 className="font-bold text-xs text-[#0F2F2A]">
-                  <Link href={`/products/${row1KnitPolo.slug}`} className="hover:text-[#2F6F4E]">
-                    Gray-Shirt
-                  </Link>
-                </h3>
-                <p className="text-xs font-bold text-slate-600 mt-0.5">৳ {row1KnitPolo.price.toLocaleString()}</p>
+          {/* Row 1: Staggered Bento Cards (Low Opacity Glass, Clean Radius & Emerald Accents) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 items-stretch">
+            {/* Card 1: Casual Shoe (3 cols) */}
+            <div className="lg:col-span-3 bg-white/10 hover:bg-white/15 backdrop-blur-xl border border-white/15 hover:border-white/30 rounded-lg p-4 sm:p-5 flex flex-col justify-between shadow-xl hover:-translate-y-0.5 transition-all duration-300 group">
+              <div className="bg-white/5 backdrop-blur-md rounded-md p-4 relative overflow-hidden h-[300px] flex items-center justify-center border border-white/10">
+                <button
+                  onClick={() => toggleWishlist(row1CasualShoe.id)}
+                  className="absolute top-3 right-3 w-8 h-8 rounded-md bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-xs transition hover:scale-105 z-10"
+                  aria-label="Wishlist"
+                >
+                  <Heart className={`w-4 h-4 ${wishlist.includes(row1CasualShoe.id) ? "fill-rose-500 text-rose-500" : "text-white hover:text-rose-400"}`} />
+                </button>
+                
+                <Link href={`/products/${row1CasualShoe.slug}`} className="w-full h-full flex items-center justify-center">
+                  <img
+                    src={row1CasualShoe.media[0]?.url}
+                    alt={row1CasualShoe.name}
+                    className="max-h-52 object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-md"
+                  />
+                </Link>
               </div>
 
-              <button
-                onClick={() => handleAddToCart({ id: row1KnitPolo.id, name: row1KnitPolo.name, price: row1KnitPolo.price, img: row1KnitPolo.media[0]?.url })}
-                className="text-[11px] font-bold text-[#0F2F2A] hover:text-[#2F6F4E] underline uppercase tracking-wider"
-              >
-                + Bag
-              </button>
+              <div className="mt-3.5 flex items-start justify-between">
+                <div>
+                  <h3 className="font-semibold text-xs text-white group-hover:text-emerald-300 transition">
+                    <Link href={`/products/${row1CasualShoe.slug}`}>
+                      Casual Shoe
+                    </Link>
+                  </h3>
+                  <p className="text-xs font-bold text-emerald-400 mt-0.5">৳ {row1CasualShoe.price.toLocaleString()}</p>
+                </div>
+
+                <button
+                  onClick={() => handleAddToCart({ id: row1CasualShoe.id, name: row1CasualShoe.name, price: row1CasualShoe.price, img: row1CasualShoe.media[0]?.url })}
+                  className="text-[11px] font-bold text-[#0F2F2A] bg-white hover:bg-emerald-400 hover:text-black px-3.5 py-1.5 rounded-md transition shadow-sm uppercase tracking-wider"
+                >
+                  + Bag
+                </button>
+              </div>
+            </div>
+
+            {/* Card 2: Center Featured - Gray-Shirt Knit Polo (6 cols) */}
+            <div className="lg:col-span-6 bg-white/10 hover:bg-white/15 backdrop-blur-xl border border-white/15 hover:border-white/30 rounded-lg p-4 sm:p-5 flex flex-col justify-between shadow-xl hover:-translate-y-0.5 transition-all duration-300 group">
+              <div className="rounded-md relative overflow-hidden h-[300px] flex items-center justify-center border border-white/10 bg-black/20">
+                <span className="absolute top-3 left-3 bg-white text-[#0F2F2A] font-extrabold text-[9px] uppercase tracking-wider px-2.5 py-0.5 rounded shadow-xs z-10">
+                  FEATURED LOOK
+                </span>
+
+                <button
+                  onClick={() => toggleWishlist(row1KnitPolo.id)}
+                  className="absolute top-3 right-3 w-8 h-8 rounded-md bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-xs transition hover:scale-105 z-10"
+                  aria-label="Wishlist"
+                >
+                  <Heart className={`w-4 h-4 ${wishlist.includes(row1KnitPolo.id) ? "fill-rose-500 text-rose-500" : "text-white hover:text-rose-400"}`} />
+                </button>
+
+                <Link href={`/products/${row1KnitPolo.slug}`} className="w-full h-full flex items-center justify-center">
+                  <img
+                    src={row1KnitPolo.media[0]?.url}
+                    alt={row1KnitPolo.name}
+                    className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
+                  />
+                </Link>
+              </div>
+
+              <div className="mt-3.5 flex items-start justify-between">
+                <div>
+                  <h3 className="font-semibold text-xs text-white group-hover:text-emerald-300 transition">
+                    <Link href={`/products/${row1KnitPolo.slug}`}>
+                      Gray-Shirt
+                    </Link>
+                  </h3>
+                  <p className="text-xs font-bold text-emerald-400 mt-0.5">৳ {row1KnitPolo.price.toLocaleString()}</p>
+                </div>
+
+                <button
+                  onClick={() => handleAddToCart({ id: row1KnitPolo.id, name: row1KnitPolo.name, price: row1KnitPolo.price, img: row1KnitPolo.media[0]?.url })}
+                  className="text-[11px] font-bold text-[#0F2F2A] bg-white hover:bg-emerald-400 hover:text-black px-3.5 py-1.5 rounded-md transition shadow-sm uppercase tracking-wider"
+                >
+                  + Bag
+                </button>
+              </div>
+            </div>
+
+            {/* Card 3: Woman Bage (3 cols) */}
+            <div className="lg:col-span-3 bg-white/10 hover:bg-white/15 backdrop-blur-xl border border-white/15 hover:border-white/30 rounded-lg p-4 sm:p-5 flex flex-col justify-between shadow-xl hover:-translate-y-0.5 transition-all duration-300 group">
+              <div className="bg-white/5 backdrop-blur-md rounded-md p-4 relative overflow-hidden h-[300px] flex items-center justify-center border border-white/10">
+                <button
+                  onClick={() => toggleWishlist(row1CyanTote.id)}
+                  className="absolute top-3 right-3 w-8 h-8 rounded-md bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-xs transition hover:scale-105 z-10"
+                  aria-label="Wishlist"
+                >
+                  <Heart className={`w-4 h-4 ${wishlist.includes(row1CyanTote.id) ? "fill-rose-500 text-rose-500" : "text-white hover:text-rose-400"}`} />
+                </button>
+
+                <Link href={`/products/${row1CyanTote.slug}`} className="w-full h-full flex items-center justify-center">
+                  <img
+                    src={row1CyanTote.media[0]?.url}
+                    alt={row1CyanTote.name}
+                    className="max-h-56 object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-md"
+                  />
+                </Link>
+              </div>
+
+              <div className="mt-3.5 flex items-start justify-between">
+                <div>
+                  <h3 className="font-semibold text-xs text-white group-hover:text-emerald-300 transition">
+                    <Link href={`/products/${row1CyanTote.slug}`}>
+                      Woman Tote Bag
+                    </Link>
+                  </h3>
+                  <p className="text-xs font-bold text-emerald-400 mt-0.5">৳ {row1CyanTote.price.toLocaleString()}</p>
+                </div>
+
+                <button
+                  onClick={() => handleAddToCart({ id: row1CyanTote.id, name: row1CyanTote.name, price: row1CyanTote.price, img: row1CyanTote.media[0]?.url })}
+                  className="text-[11px] font-bold text-[#0F2F2A] bg-white hover:bg-emerald-400 hover:text-black px-3.5 py-1.5 rounded-md transition shadow-sm uppercase tracking-wider"
+                >
+                  + Bag
+                </button>
+              </div>
             </div>
           </div>
 
-          {/* Card 3: Woman Bage (3 cols) */}
-          <div className="lg:col-span-3 flex flex-col justify-between group">
-            <div className="bg-[#F4F5F7] rounded-xl p-5 relative overflow-hidden h-[340px] flex items-center justify-center shadow-2xs">
-              <button
-                onClick={() => toggleWishlist(row1CyanTote.id)}
-                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-xs transition hover:scale-110 z-10"
-                aria-label="Wishlist"
-              >
-                <Heart className={`w-4 h-4 ${wishlist.includes(row1CyanTote.id) ? "fill-rose-500 text-rose-500" : "text-slate-400 hover:text-rose-500"}`} />
-              </button>
+          {/* Row 2: 4 Balanced Cards (Low Opacity Glass, Clean Radius & Emerald Accents) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {/* Card 4: Fashion T-Shirt */}
+            <div className="bg-white/10 hover:bg-white/15 backdrop-blur-xl border border-white/15 hover:border-white/30 rounded-lg p-4 flex flex-col justify-between shadow-xl hover:-translate-y-0.5 transition-all duration-300 group">
+              <div className="rounded-md relative overflow-hidden h-[260px] flex items-center justify-center border border-white/10 bg-black/20">
+                <button
+                  onClick={() => toggleWishlist(row2Tee.id)}
+                  className="absolute top-3 right-3 w-8 h-8 rounded-md bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-xs transition hover:scale-105 z-10"
+                  aria-label="Wishlist"
+                >
+                  <Heart className={`w-4 h-4 ${wishlist.includes(row2Tee.id) ? "fill-rose-500 text-rose-500" : "text-white hover:text-rose-400"}`} />
+                </button>
 
-              <Link href={`/products/${row1CyanTote.slug}`} className="w-full h-full flex items-center justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={row1CyanTote.media[0]?.url}
-                  alt={row1CyanTote.name}
-                  className="max-h-56 object-contain group-hover:scale-105 transition-transform duration-300"
-                />
-              </Link>
-            </div>
-
-            <div className="mt-3 flex items-start justify-between">
-              <div>
-                <h3 className="font-bold text-xs text-[#0F2F2A]">
-                  <Link href={`/products/${row1CyanTote.slug}`} className="hover:text-[#2F6F4E]">
-                    Woman Bage
-                  </Link>
-                </h3>
-                <p className="text-xs font-bold text-slate-600 mt-0.5">৳ {row1CyanTote.price.toLocaleString()}</p>
+                <Link href={`/products/${row2Tee.slug}`} className="w-full h-full flex items-center justify-center">
+                  <img
+                    src={row2Tee.media[0]?.url}
+                    alt={row2Tee.name}
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                  />
+                </Link>
               </div>
 
-              <button
-                onClick={() => handleAddToCart({ id: row1CyanTote.id, name: row1CyanTote.name, price: row1CyanTote.price, img: row1CyanTote.media[0]?.url })}
-                className="text-[11px] font-bold text-[#0F2F2A] hover:text-[#2F6F4E] underline uppercase tracking-wider"
-              >
-                + Bag
-              </button>
-            </div>
-          </div>
-        </div>
+              <div className="mt-3 flex items-start justify-between">
+                <div>
+                  <h3 className="font-semibold text-xs text-white group-hover:text-emerald-300 transition">
+                    <Link href={`/products/${row2Tee.slug}`}>
+                      Fashion T-Shirt
+                    </Link>
+                  </h3>
+                  <p className="text-xs font-bold text-emerald-400 mt-0.5">৳ {row2Tee.price.toLocaleString()}</p>
+                </div>
 
-        {/* Row 2: 4 Balanced Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {/* Card 4: Fashion T-Shirt */}
-          <div className="flex flex-col justify-between group">
-            <div className="bg-[#F4F5F7] rounded-xl relative overflow-hidden h-[300px] flex items-center justify-center shadow-2xs">
-              <button
-                onClick={() => toggleWishlist(row2Tee.id)}
-                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-xs transition hover:scale-110 z-10"
-                aria-label="Wishlist"
-              >
-                <Heart className={`w-4 h-4 ${wishlist.includes(row2Tee.id) ? "fill-rose-500 text-rose-500" : "text-slate-400 hover:text-rose-500"}`} />
-              </button>
-
-              <Link href={`/products/${row2Tee.slug}`} className="w-full h-full flex items-center justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={row2Tee.media[0]?.url}
-                  alt={row2Tee.name}
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                />
-              </Link>
+                <button
+                  onClick={() => handleAddToCart({ id: row2Tee.id, name: row2Tee.name, price: row2Tee.price, img: row2Tee.media[0]?.url })}
+                  className="text-[11px] font-bold text-[#0F2F2A] bg-white hover:bg-emerald-400 hover:text-black px-3.5 py-1.5 rounded-md transition shadow-sm uppercase tracking-wider"
+                >
+                  + Bag
+                </button>
+              </div>
             </div>
 
-            <div className="mt-3 flex items-start justify-between">
-              <div>
-                <h3 className="font-bold text-xs text-[#0F2F2A]">
-                  <Link href={`/products/${row2Tee.slug}`} className="hover:text-[#2F6F4E]">
-                    Fashion T-Shirt
-                  </Link>
-                </h3>
-                <p className="text-xs font-bold text-slate-600 mt-0.5">৳ {row2Tee.price.toLocaleString()}</p>
+            {/* Card 5: Kids Top / Camisole */}
+            <div className="bg-white/10 hover:bg-white/15 backdrop-blur-xl border border-white/15 hover:border-white/30 rounded-lg p-4 flex flex-col justify-between shadow-xl hover:-translate-y-0.5 transition-all duration-300 group">
+              <div className="bg-white/5 backdrop-blur-md rounded-md p-4 relative overflow-hidden h-[260px] flex items-center justify-center border border-white/10">
+                <button
+                  onClick={() => toggleWishlist(row2Top.id)}
+                  className="absolute top-3 right-3 w-8 h-8 rounded-md bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-xs transition hover:scale-105 z-10"
+                  aria-label="Wishlist"
+                >
+                  <Heart className={`w-4 h-4 ${wishlist.includes(row2Top.id) ? "fill-rose-500 text-rose-500" : "text-white hover:text-rose-400"}`} />
+                </button>
+
+                <Link href={`/products/${row2Top.slug}`} className="w-full h-full flex items-center justify-center">
+                  <img
+                    src={row2Top.media[0]?.url}
+                    alt={row2Top.name}
+                    className="max-h-48 object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-md"
+                  />
+                </Link>
               </div>
 
-              <button
-                onClick={() => handleAddToCart({ id: row2Tee.id, name: row2Tee.name, price: row2Tee.price, img: row2Tee.media[0]?.url })}
-                className="text-[11px] font-bold text-[#0F2F2A] hover:text-[#2F6F4E] underline uppercase tracking-wider"
-              >
-                + Bag
-              </button>
-            </div>
-          </div>
+              <div className="mt-3 flex items-start justify-between">
+                <div>
+                  <h3 className="font-semibold text-xs text-white group-hover:text-emerald-300 transition">
+                    <Link href={`/products/${row2Top.slug}`}>
+                      Kids Top
+                    </Link>
+                  </h3>
+                  <p className="text-xs font-bold text-emerald-400 mt-0.5">৳ {row2Top.price.toLocaleString()}</p>
+                </div>
 
-          {/* Card 5: Kids Top / Camisole */}
-          <div className="flex flex-col justify-between group">
-            <div className="bg-[#F4F5F7] rounded-xl p-5 relative overflow-hidden h-[300px] flex items-center justify-center shadow-2xs">
-              <button
-                onClick={() => toggleWishlist(row2Top.id)}
-                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-xs transition hover:scale-110 z-10"
-                aria-label="Wishlist"
-              >
-                <Heart className={`w-4 h-4 ${wishlist.includes(row2Top.id) ? "fill-rose-500 text-rose-500" : "text-slate-400 hover:text-rose-500"}`} />
-              </button>
-
-              <Link href={`/products/${row2Top.slug}`} className="w-full h-full flex items-center justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={row2Top.media[0]?.url}
-                  alt={row2Top.name}
-                  className="max-h-52 object-contain group-hover:scale-105 transition-transform duration-300"
-                />
-              </Link>
+                <button
+                  onClick={() => handleAddToCart({ id: row2Top.id, name: row2Top.name, price: row2Top.price, img: row2Top.media[0]?.url })}
+                  className="text-[11px] font-bold text-[#0F2F2A] bg-white hover:bg-emerald-400 hover:text-black px-3.5 py-1.5 rounded-md transition shadow-sm uppercase tracking-wider"
+                >
+                  + Bag
+                </button>
+              </div>
             </div>
 
-            <div className="mt-3 flex items-start justify-between">
-              <div>
-                <h3 className="font-bold text-xs text-[#0F2F2A]">
-                  <Link href={`/products/${row2Top.slug}`} className="hover:text-[#2F6F4E]">
-                    Kids Top
-                  </Link>
-                </h3>
-                <p className="text-xs font-bold text-slate-600 mt-0.5">৳ {row2Top.price.toLocaleString()}</p>
+            {/* Card 6: Smart Headphone */}
+            <div className="bg-white/10 hover:bg-white/15 backdrop-blur-xl border border-white/15 hover:border-white/30 rounded-lg p-4 flex flex-col justify-between shadow-xl hover:-translate-y-0.5 transition-all duration-300 group">
+              <div className="bg-white/5 backdrop-blur-md rounded-md p-4 relative overflow-hidden h-[260px] flex items-center justify-center border border-white/10">
+                <button
+                  onClick={() => toggleWishlist(row2Headphone.id)}
+                  className="absolute top-3 right-3 w-8 h-8 rounded-md bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-xs transition hover:scale-105 z-10"
+                  aria-label="Wishlist"
+                >
+                  <Heart className={`w-4 h-4 ${wishlist.includes(row2Headphone.id) ? "fill-rose-500 text-rose-500" : "text-white hover:text-rose-400"}`} />
+                </button>
+
+                <Link href={`/products/${row2Headphone.slug}`} className="w-full h-full flex items-center justify-center">
+                  <img
+                    src={row2Headphone.media[0]?.url}
+                    alt={row2Headphone.name}
+                    className="max-h-48 object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-md"
+                  />
+                </Link>
               </div>
 
-              <button
-                onClick={() => handleAddToCart({ id: row2Top.id, name: row2Top.name, price: row2Top.price, img: row2Top.media[0]?.url })}
-                className="text-[11px] font-bold text-[#0F2F2A] hover:text-[#2F6F4E] underline uppercase tracking-wider"
-              >
-                + Bag
-              </button>
-            </div>
-          </div>
+              <div className="mt-3 flex items-start justify-between">
+                <div>
+                  <h3 className="font-semibold text-xs text-white group-hover:text-emerald-300 transition">
+                    <Link href={`/products/${row2Headphone.slug}`}>
+                      Smart Headphone
+                    </Link>
+                  </h3>
+                  <p className="text-xs font-bold text-emerald-400 mt-0.5">৳ {row2Headphone.price.toLocaleString()}</p>
+                </div>
 
-          {/* Card 6: Smart Headphone */}
-          <div className="flex flex-col justify-between group">
-            <div className="bg-[#F4F5F7] rounded-xl p-5 relative overflow-hidden h-[300px] flex items-center justify-center shadow-2xs">
-              <button
-                onClick={() => toggleWishlist(row2Headphone.id)}
-                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-xs transition hover:scale-110 z-10"
-                aria-label="Wishlist"
-              >
-                <Heart className={`w-4 h-4 ${wishlist.includes(row2Headphone.id) ? "fill-rose-500 text-rose-500" : "text-slate-400 hover:text-rose-500"}`} />
-              </button>
-
-              <Link href={`/products/${row2Headphone.slug}`} className="w-full h-full flex items-center justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={row2Headphone.media[0]?.url}
-                  alt={row2Headphone.name}
-                  className="max-h-48 object-contain group-hover:scale-105 transition-transform duration-300"
-                />
-              </Link>
+                <button
+                  onClick={() => handleAddToCart({ id: row2Headphone.id, name: row2Headphone.name, price: row2Headphone.price, img: row2Headphone.media[0]?.url })}
+                  className="text-[11px] font-bold text-[#0F2F2A] bg-white hover:bg-emerald-400 hover:text-black px-3.5 py-1.5 rounded-md transition shadow-sm uppercase tracking-wider"
+                >
+                  + Bag
+                </button>
+              </div>
             </div>
 
-            <div className="mt-3 flex items-start justify-between">
-              <div>
-                <h3 className="font-bold text-xs text-[#0F2F2A]">
-                  <Link href={`/products/${row2Headphone.slug}`} className="hover:text-[#2F6F4E]">
-                    Smart Headpone
-                  </Link>
-                </h3>
-                <p className="text-xs font-bold text-slate-600 mt-0.5">৳ {row2Headphone.price.toLocaleString()}</p>
+            {/* Card 7: Nike Urban Backpack */}
+            <div className="bg-white/10 hover:bg-white/15 backdrop-blur-xl border border-white/15 hover:border-white/30 rounded-lg p-4 flex flex-col justify-between shadow-xl hover:-translate-y-0.5 transition-all duration-300 group">
+              <div className="bg-white/5 backdrop-blur-md rounded-md p-4 relative overflow-hidden h-[260px] flex items-center justify-center border border-white/10">
+                <button
+                  onClick={() => toggleWishlist(row2Backpack.id)}
+                  className="absolute top-3 right-3 w-8 h-8 rounded-md bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-xs transition hover:scale-105 z-10"
+                  aria-label="Wishlist"
+                >
+                  <Heart className={`w-4 h-4 ${wishlist.includes(row2Backpack.id) ? "fill-rose-500 text-rose-500" : "text-white hover:text-rose-400"}`} />
+                </button>
+
+                <Link href={`/products/${row2Backpack.slug}`} className="w-full h-full flex items-center justify-center">
+                  <img
+                    src={row2Backpack.media[0]?.url}
+                    alt={row2Backpack.name}
+                    className="max-h-48 object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-md"
+                  />
+                </Link>
               </div>
 
-              <button
-                onClick={() => handleAddToCart({ id: row2Headphone.id, name: row2Headphone.name, price: row2Headphone.price, img: row2Headphone.media[0]?.url })}
-                className="text-[11px] font-bold text-[#0F2F2A] hover:text-[#2F6F4E] underline uppercase tracking-wider"
-              >
-                + Bag
-              </button>
-            </div>
-          </div>
+              <div className="mt-3 flex items-start justify-between">
+                <div>
+                  <h3 className="font-semibold text-xs text-white group-hover:text-emerald-300 transition">
+                    <Link href={`/products/${row2Backpack.slug}`}>
+                      Nike Urban Backpack
+                    </Link>
+                  </h3>
+                  <p className="text-xs font-bold text-emerald-400 mt-0.5">৳ {row2Backpack.price.toLocaleString()}</p>
+                </div>
 
-          {/* Card 7: Nike Bage / Urban Backpack */}
-          <div className="flex flex-col justify-between group">
-            <div className="bg-[#F4F5F7] rounded-xl p-5 relative overflow-hidden h-[300px] flex items-center justify-center shadow-2xs">
-              <button
-                onClick={() => toggleWishlist(row2Backpack.id)}
-                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-xs transition hover:scale-110 z-10"
-                aria-label="Wishlist"
-              >
-                <Heart className={`w-4 h-4 ${wishlist.includes(row2Backpack.id) ? "fill-rose-500 text-rose-500" : "text-slate-400 hover:text-rose-500"}`} />
-              </button>
-
-              <Link href={`/products/${row2Backpack.slug}`} className="w-full h-full flex items-center justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={row2Backpack.media[0]?.url}
-                  alt={row2Backpack.name}
-                  className="max-h-52 object-contain group-hover:scale-105 transition-transform duration-300"
-                />
-              </Link>
-            </div>
-
-            <div className="mt-3 flex items-start justify-between">
-              <div>
-                <h3 className="font-bold text-xs text-[#0F2F2A]">
-                  <Link href={`/products/${row2Backpack.slug}`} className="hover:text-[#2F6F4E]">
-                    Nike Bage
-                  </Link>
-                </h3>
-                <p className="text-xs font-bold text-slate-600 mt-0.5">৳ {row2Backpack.price.toLocaleString()}</p>
+                <button
+                  onClick={() => handleAddToCart({ id: row2Backpack.id, name: row2Backpack.name, price: row2Backpack.price, img: row2Backpack.media[0]?.url })}
+                  className="text-[11px] font-bold text-[#0F2F2A] bg-white hover:bg-emerald-400 hover:text-black px-3.5 py-1.5 rounded-md transition shadow-sm uppercase tracking-wider"
+                >
+                  + Bag
+                </button>
               </div>
-
-              <button
-                onClick={() => handleAddToCart({ id: row2Backpack.id, name: row2Backpack.name, price: row2Backpack.price, img: row2Backpack.media[0]?.url })}
-                className="text-[11px] font-bold text-[#0F2F2A] hover:text-[#2F6F4E] underline uppercase tracking-wider"
-              >
-                + Bag
-              </button>
             </div>
           </div>
         </div>
@@ -867,7 +955,7 @@ export default function HomePage() {
 
       {/* 6. CONTRAST PROMO BANNER (END OF SEASON SALE UP TO 50% OFF) */}
       <section id="promo-sale" className="max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-8 w-full">
-        <div className="bg-[#0F2F2A] rounded-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between text-white shadow-xl min-h-[220px]">
+        <div className="bg-[#0F2F2A] rounded-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between text-white shadow-xl min-h-[220px]">
           {/* Left Model Photo */}
           <div className="w-full md:w-1/4 h-48 md:h-64 relative overflow-hidden shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -880,7 +968,7 @@ export default function HomePage() {
 
           {/* Center Callout */}
           <div className="py-8 px-6 text-center z-10">
-            <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2">
+            <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 block mb-2">
               LAST CHANCE
             </span>
             <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight uppercase">
@@ -889,9 +977,9 @@ export default function HomePage() {
             <div className="mt-5">
               <a
                 href="#new-collection"
-                className="inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-[#0F2F2A] text-xs font-bold px-7 py-3 rounded-full transition shadow-md btn-press-effect tracking-wider uppercase"
+                className="inline-flex items-center gap-2 bg-white hover:bg-emerald-400 hover:text-black text-[#0F2F2A] text-xs font-bold px-7 py-3 rounded-md transition shadow-md btn-press-effect tracking-wider uppercase"
               >
-                <span>SHOP IT&apos;S NOW</span>
+                <span>SHOP SALE NOW</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </a>
             </div>
@@ -914,14 +1002,14 @@ export default function HomePage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Column: Quote & Author */}
           <div className="lg:col-span-6 space-y-4 pr-0 lg:pr-8">
-            <span className="text-xs uppercase tracking-wider text-slate-500 font-bold block">
-              What people said
+            <span className="text-xs uppercase tracking-wider text-emerald-600 font-bold block">
+              Customer Experience
             </span>
             <h2 className="text-3xl sm:text-5xl font-normal tracking-tight text-[#0F2F2A] leading-tight font-serif sm:font-sans">
               I like to order on<br />this way.
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal pt-2">
-              Very professional and friendly at the same time. They packed the order on schedule and the detail of their wrapping is top notch... one of my best experience for buying online items. Surely will come back for another purchase.
+              Very professional and friendly at the same time. They packed the order on schedule and the detail of their wrapping is top notch... one of my best experiences for buying online fashion items. Surely will come back for another purchase.
             </p>
 
             <div className="pt-4 border-t border-slate-200">
@@ -932,8 +1020,8 @@ export default function HomePage() {
 
           {/* Right Column: Customer Portrait in Rounded Card */}
           <div className="lg:col-span-6 flex justify-center lg:justify-end">
-            <div className="w-full max-w-lg bg-[#EAE4DC] rounded-2xl overflow-hidden p-6 sm:p-8 flex items-center justify-center shadow-xs">
-              <div className="w-full h-80 sm:h-96 rounded-xl overflow-hidden relative">
+            <div className="w-full max-w-lg bg-[#EAE4DC] rounded-xl overflow-hidden p-6 sm:p-8 flex items-center justify-center shadow-xs">
+              <div className="w-full h-80 sm:h-96 rounded-lg overflow-hidden relative">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
@@ -954,7 +1042,7 @@ export default function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
           {/* Photo 1: Clothes Rack */}
-          <div className="md:col-span-4 rounded-xl overflow-hidden h-[340px] shadow-2xs group">
+          <div className="md:col-span-4 rounded-lg overflow-hidden h-[340px] shadow-2xs group">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=800&q=80"
@@ -964,7 +1052,7 @@ export default function HomePage() {
           </div>
 
           {/* Photo 2: Woman in Trench Coat */}
-          <div className="md:col-span-3 rounded-xl overflow-hidden h-[340px] shadow-2xs group">
+          <div className="md:col-span-3 rounded-lg overflow-hidden h-[340px] shadow-2xs group">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?auto=format&fit=crop&w=800&q=80"
@@ -974,20 +1062,20 @@ export default function HomePage() {
           </div>
 
           {/* Article Text Card */}
-          <div className="md:col-span-5 bg-white border border-slate-200/80 rounded-xl p-8 flex flex-col justify-between shadow-2xs">
+          <div className="md:col-span-5 bg-white border border-slate-200/80 rounded-lg p-8 flex flex-col justify-between shadow-2xs">
             <div>
               <h3 className="text-2xl sm:text-3xl font-normal text-[#0F2F2A] tracking-tight leading-snug font-serif sm:font-sans">
-                How to combine your daily outfit to looks fredh and cool
+                How to combine your daily outfit to look fresh and cool
               </h3>
               <p className="mt-4 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                Maybe you don&apos;t need to buy new clothes to look nice, fresh-looking outfit everyday. Maybe what you need is to combine your clothes collections. Mix and match is the key.
+                Maybe you don&apos;t need to buy new clothes to have a fresh-looking outfit everyday. What you need is to combine your existing wardrobe pieces with intention. Mix and match is the key.
               </p>
             </div>
 
             <div className="pt-6">
               <button 
                 onClick={() => alert("Blog article opened: 'Mastering Capsule Wardrobes & Bangladesh Handlooms'")}
-                className="border border-[#0F2F2A] hover:bg-[#0F2F2A] hover:text-white text-[#0F2F2A] text-xs font-bold px-6 py-2.5 rounded-full transition uppercase tracking-wider"
+                className="border border-[#0F2F2A] hover:bg-[#0F2F2A] hover:text-white text-[#0F2F2A] text-xs font-bold px-6 py-2.5 rounded-md transition uppercase tracking-wider"
               >
                 READ MORE
               </button>
@@ -1022,7 +1110,7 @@ export default function HomePage() {
             {MOCK_STORES.map((store) => (
               <div 
                 key={store.id}
-                className="bg-white border border-slate-200 rounded-xl p-5 shadow-2xs flex flex-col justify-between hover:border-[#2F6F4E]/40 transition"
+                className="bg-white border border-slate-200 rounded-lg p-5 shadow-2xs flex flex-col justify-between hover:border-[#2F6F4E]/40 transition"
               >
                 <div>
                   <div className="flex items-center gap-3">
@@ -1030,7 +1118,7 @@ export default function HomePage() {
                     <img
                       src={store.logo}
                       alt={store.name}
-                      className="w-12 h-12 rounded-lg object-cover border border-slate-200 bg-slate-50"
+                      className="w-12 h-12 rounded-md object-cover border border-slate-200 bg-slate-50"
                     />
                     <div>
                       <h3 className="font-bold text-[#0F2F2A] text-sm flex items-center gap-1.5">
@@ -1064,32 +1152,47 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 10. HIGH-END DARK FOOTER (Matching Family Studio Reference) */}
-      <footer id="footer" className="bg-[#0B1E1B] text-slate-300 pt-16 pb-10 border-t border-[#2F6F4E]/30 text-xs">
-        <div className="max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-white/10">
+      {/* 10. HIGH-END CINEMATIC VIDEO FOOTER */}
+      <footer id="footer" className="relative overflow-hidden bg-black text-slate-200 pt-20 pb-12 border-t border-white/20 text-xs min-h-[460px] flex flex-col justify-between">
+        {/* Full-Bleed Ambient Footer Video (Fully Visible & Vibrant) */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none filter brightness-95 contrast-[1.05]"
+        >
+          <source src="/Video-Assets/footer.mp4" type="video/mp4" />
+        </video>
+
+        {/* Minimal Dark Gradient for Clear Video Visibility & Crisp Readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-black/65 pointer-events-none" />
+
+        <div className="max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-white/20 relative z-10 w-full">
           {/* Brand & Newsletter (4 cols) */}
           <div className="md:col-span-5 space-y-4 pr-0 sm:pr-8">
-            <span className="font-extrabold text-2xl text-white tracking-tight font-serif sm:font-sans">
+            <span className="font-extrabold text-2xl text-white tracking-tight font-serif sm:font-sans drop-shadow-md">
               Elyqor Studio
             </span>
-            <p className="text-slate-400 text-xs leading-relaxed max-w-sm">
+            <p className="text-slate-200 text-xs leading-relaxed max-w-sm drop-shadow-sm">
               Experience a new standard of social commerce in Bangladesh. Verified authentic merchants with nationwide delivery and quality guarantee.
             </p>
 
-            {/* Newsletter Pill Input */}
+            {/* Newsletter Input */}
             <form onSubmit={handleSubscribe} className="pt-2 max-w-sm">
-              <div className="bg-white/10 border border-white/20 rounded-full p-1 flex items-center justify-between">
+              <div className="bg-black/50 hover:bg-black/60 backdrop-blur-xl border border-white/25 rounded-lg p-1.5 flex items-center justify-between transition shadow-xl">
                 <input
                   type="email"
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
                   placeholder="Enter your email address..."
-                  className="bg-transparent text-xs text-white placeholder:text-slate-400 px-4 py-1.5 focus:outline-none flex-1"
+                  className="bg-transparent text-xs text-white placeholder:text-slate-300 px-3.5 py-1.5 focus:outline-none flex-1"
                   required
                 />
                 <button
                   type="submit"
-                  className="bg-white hover:bg-slate-200 text-[#0F2F2A] font-bold text-xs px-5 py-2 rounded-full transition shrink-0"
+                  className="bg-white hover:bg-emerald-400 hover:text-black text-[#0F2F2A] font-bold text-xs px-5 py-2 rounded-md transition shrink-0 shadow-md uppercase tracking-wider"
                 >
                   Submit
                 </button>
@@ -1099,47 +1202,47 @@ export default function HomePage() {
 
           {/* POPULAR Columns (2 cols) */}
           <div className="md:col-span-2 space-y-3">
-            <h4 className="text-white font-bold text-xs uppercase tracking-wider">POPULAR</h4>
-            <ul className="space-y-2 text-slate-400 text-xs">
-              <li><button onClick={() => setSelectedCategory("footwear")} className="hover:text-white transition">Shoes</button></li>
-              <li><button onClick={() => setSelectedCategory("apparel")} className="hover:text-white transition">T-Shirt</button></li>
-              <li><button onClick={() => setSelectedCategory("traditional-fashion")} className="hover:text-white transition">Artisan Silk</button></li>
-              <li><button onClick={() => setSelectedCategory("bags")} className="hover:text-white transition">Canvas Bags</button></li>
-              <li><button onClick={() => setSelectedCategory("audio")} className="hover:text-white transition">Audio & Gadgets</button></li>
+            <h4 className="text-white font-bold text-xs uppercase tracking-wider drop-shadow-sm">POPULAR</h4>
+            <ul className="space-y-2 text-slate-200 text-xs drop-shadow-xs">
+              <li><button onClick={() => setSelectedCategory("footwear")} className="hover:text-emerald-300 transition">Shoes</button></li>
+              <li><button onClick={() => setSelectedCategory("apparel")} className="hover:text-emerald-300 transition">T-Shirt</button></li>
+              <li><button onClick={() => setSelectedCategory("traditional-fashion")} className="hover:text-emerald-300 transition">Artisan Silk</button></li>
+              <li><button onClick={() => setSelectedCategory("bags")} className="hover:text-emerald-300 transition">Canvas Bags</button></li>
+              <li><button onClick={() => setSelectedCategory("audio")} className="hover:text-emerald-300 transition">Audio & Gadgets</button></li>
             </ul>
           </div>
 
           {/* PAGES Column (2 cols) */}
           <div className="md:col-span-2 space-y-3">
-            <h4 className="text-white font-bold text-xs uppercase tracking-wider">PAGES</h4>
-            <ul className="space-y-2 text-slate-400 text-xs">
-              <li><a href="#new-collection" className="hover:text-white transition">All Category</a></li>
-              <li><a href="#new-collection" className="hover:text-white transition">All Products</a></li>
-              <li><a href="#promo-sale" className="hover:text-white transition">Special Events</a></li>
-              <li><a href="#footer" className="hover:text-white transition">Testimonial</a></li>
-              <li><Link href="/seller" className="hover:text-white transition">Merchant Hub</Link></li>
+            <h4 className="text-white font-bold text-xs uppercase tracking-wider drop-shadow-sm">PAGES</h4>
+            <ul className="space-y-2 text-slate-200 text-xs drop-shadow-xs">
+              <li><a href="#new-collection" className="hover:text-emerald-300 transition">All Category</a></li>
+              <li><a href="#new-collection" className="hover:text-emerald-300 transition">All Products</a></li>
+              <li><a href="#promo-sale" className="hover:text-emerald-300 transition">Special Events</a></li>
+              <li><a href="#footer" className="hover:text-emerald-300 transition">Testimonial</a></li>
+              <li><Link href="/seller" className="hover:text-emerald-300 transition">Merchant Hub</Link></li>
             </ul>
           </div>
 
           {/* STUDY / HELP Column (3 cols) */}
           <div className="md:col-span-3 space-y-3">
-            <h4 className="text-white font-bold text-xs uppercase tracking-wider">STUDY & SUPPORT</h4>
-            <ul className="space-y-2 text-slate-400 text-xs">
-              <li><a href="#new-collection" className="hover:text-white transition">Tracking Package</a></li>
-              <li><span className="text-slate-400">FAQ & Customer Helpline</span></li>
-              <li><Link href="/admin" className="hover:text-white transition">Platform Console</Link></li>
-              <li><Link href="/stores/apex-gadgets-lab" className="hover:text-white transition">Merchant Directory</Link></li>
-              <li><span className="text-slate-400">Terms and Conditions</span></li>
+            <h4 className="text-white font-bold text-xs uppercase tracking-wider drop-shadow-sm">STUDY & SUPPORT</h4>
+            <ul className="space-y-2 text-slate-200 text-xs drop-shadow-xs">
+              <li><a href="#new-collection" className="hover:text-emerald-300 transition">Tracking Package</a></li>
+              <li><span className="text-slate-300">FAQ & Customer Helpline</span></li>
+              <li><Link href="/admin" className="hover:text-emerald-300 transition">Platform Console</Link></li>
+              <li><Link href="/stores/apex-gadgets-lab" className="hover:text-emerald-300 transition">Merchant Directory</Link></li>
+              <li><span className="text-slate-300">Terms and Conditions</span></li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Copyright */}
-        <div className="max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400 text-[11px]">
+        <div className="max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-300 text-[11px] relative z-10 w-full drop-shadow-xs">
           <p>© 2026 Elyqor Technologies Ltd. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <Link href="/sitemap.xml" target="_blank" className="hover:underline">XML Sitemap</Link>
-            <Link href="/robots.txt" target="_blank" className="hover:underline">Robots.txt</Link>
+            <Link href="/sitemap.xml" target="_blank" className="hover:text-white hover:underline">XML Sitemap</Link>
+            <Link href="/robots.txt" target="_blank" className="hover:text-white hover:underline">Robots.txt</Link>
           </div>
         </div>
       </footer>

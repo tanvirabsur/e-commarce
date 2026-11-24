@@ -117,7 +117,7 @@ export default function AdminDashboardPage() {
       {/* 2. Top Row: 3 KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Card 1: Page Views */}
-        <div className="bg-white border border-[#E6EFE2] rounded-xl p-5 shadow-xs flex flex-col justify-between">
+        <div className="bg-white border border-[#E6EFE2] rounded-md p-5 shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between text-slate-500 text-xs">
             <div className="flex items-center gap-1.5 font-medium">
               <Eye className="w-4 h-4 text-slate-400" />
@@ -136,7 +136,7 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Card 2: Total Revenue */}
-        <div className="bg-white border border-[#E6EFE2] rounded-xl p-5 shadow-xs flex flex-col justify-between">
+        <div className="bg-white border border-[#E6EFE2] rounded-md p-5 shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between text-slate-500 text-xs">
             <div className="flex items-center gap-1.5 font-medium">
               <FileText className="w-4 h-4 text-slate-400" />
@@ -155,7 +155,7 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Card 3: Bounce Rate / Order Conversion */}
-        <div className="bg-white border border-[#E6EFE2] rounded-xl p-5 shadow-xs flex flex-col justify-between">
+        <div className="bg-white border border-[#E6EFE2] rounded-md p-5 shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between text-slate-500 text-xs">
             <div className="flex items-center gap-1.5 font-medium">
               <Activity className="w-4 h-4 text-slate-400" />
@@ -177,7 +177,7 @@ export default function AdminDashboardPage() {
       {/* 3. Middle Row: Sales Overview Connected Stacks + Weekly Subscriber Bar Chart */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         {/* Left Column: Sales Overview Flow Chart (8 cols) */}
-        <div className="lg:col-span-8 bg-white border border-[#E6EFE2] rounded-xl p-6 shadow-xs flex flex-col justify-between">
+        <div className="lg:col-span-8 bg-white border border-[#E6EFE2] rounded-md p-6 shadow-xs flex flex-col justify-between">
           <div>
             {/* Header with Title and Filter/Sort Pills */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4">
@@ -301,7 +301,7 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Right Column: Total Orders Weekly Bar Chart (4 cols) */}
-        <div className="lg:col-span-4 bg-white border border-[#E6EFE2] rounded-xl p-6 shadow-xs flex flex-col justify-between">
+        <div className="lg:col-span-4 bg-white border border-[#E6EFE2] rounded-md p-6 shadow-xs flex flex-col justify-between">
           <div>
             {/* Header */}
             <div className="flex items-center justify-between pb-3">
@@ -380,7 +380,7 @@ export default function AdminDashboardPage() {
       {/* 4. Bottom Row: Sales Distribution Arc Gauge + Integrations & Settlements Table */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         {/* Left Column: Sales Distribution Semi-Donut Gauge (5 cols) */}
-        <div className="lg:col-span-5 bg-white border border-[#E6EFE2] rounded-xl p-6 shadow-xs flex flex-col justify-between">
+        <div className="lg:col-span-5 bg-white border border-[#E6EFE2] rounded-md p-6 shadow-xs flex flex-col justify-between">
           <div>
             {/* Header */}
             <div className="flex items-center justify-between pb-3">
@@ -450,7 +450,7 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Right Column: List of Integrations & Courier Settlements (7 cols) */}
-        <div className="lg:col-span-7 bg-white border border-[#E6EFE2] rounded-xl p-6 shadow-xs flex flex-col justify-between">
+        <div className="lg:col-span-7 bg-white border border-[#E6EFE2] rounded-md p-6 shadow-xs flex flex-col justify-between">
           <div>
             {/* Header */}
             <div className="flex items-center justify-between pb-3">

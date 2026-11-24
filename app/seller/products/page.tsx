@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { Package, PlusCircle, Sparkles, ExternalLink } from "lucide-react";
 import { MOCK_PRODUCTS } from "@/lib/mock-data";
 
@@ -8,7 +8,7 @@ export default function SellerProductsPage() {
   return (
     <div className="space-y-6">
       {/* Banner */}
-      <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#E6EFE2] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shadow-xs">
+      <div className="bg-white p-6 sm:p-8 rounded-md border border-[#E6EFE2] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shadow-xs">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="p-2 rounded-lg bg-[#F1F7ED] text-[#2F6F4E]">
@@ -34,7 +34,7 @@ export default function SellerProductsPage() {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl border border-[#E6EFE2] p-6 sm:p-8 space-y-4 shadow-xs">
+      <div className="bg-white rounded-md border border-[#E6EFE2] p-6 sm:p-8 space-y-4 shadow-xs">
         <div className="flex items-center justify-between">
           <h3 className="font-black text-[#0F2F2A] text-base">All Published Products ({products.length})</h3>
           <span className="text-xs text-slate-400 font-mono">Automated Schema.org JSON-LD Synced</span>
@@ -62,7 +62,7 @@ export default function SellerProductsPage() {
                       <img
                         src={p.media[0]?.url}
                         alt={p.name}
-                        className="w-12 h-12 rounded-xl object-cover bg-slate-100 shrink-0"
+                        className="w-12 h-12 rounded-md object-cover bg-slate-100 shrink-0"
                       />
                       <div className="min-w-0">
                         <p className="font-bold text-[#0F2F2A] truncate max-w-xs">{p.name}</p>
@@ -87,7 +87,7 @@ export default function SellerProductsPage() {
                     </span>
                   </td>
                   <td className="py-3.5">
-                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                    <span className={`px-2.5 py-0.5 rounded text-[10px] font-bold ${
                       p.approvalStatus === "approved" ? "bg-[#F1F7ED] text-[#2F6F4E]" :
                       p.approvalStatus === "pending" ? "bg-[#FAF3E0] text-[#D9A441]" :
                       "bg-red-50 text-red-600"

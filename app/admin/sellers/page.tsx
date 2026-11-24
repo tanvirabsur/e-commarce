@@ -26,7 +26,7 @@ export default function AdminSellersPage() {
       {/* Sellers Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {MOCK_STORES.map((store) => (
-          <div key={store.id} className="bg-white rounded-xl border border-[#E6EFE2] p-5 flex flex-col justify-between space-y-4 shadow-xs">
+          <div key={store.id} className="bg-white rounded-md border border-[#E6EFE2] p-5 flex flex-col justify-between space-y-4 shadow-xs">
             <div>
               <div className="flex items-start justify-between gap-3">
                 <div className="flex items-center gap-3">

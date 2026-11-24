@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { 
@@ -60,7 +60,7 @@ export default function AdminSEOPage() {
   return (
     <div className="space-y-6">
       {/* Page Title & Score Header */}
-      <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#E6EFE2] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-xs">
+      <div className="bg-white p-6 sm:p-8 rounded-md border border-[#E6EFE2] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-xs">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="p-2 rounded-lg bg-[#F1F7ED] text-[#2F6F4E]">
@@ -77,7 +77,7 @@ export default function AdminSEOPage() {
         </div>
 
         {/* Global SEO Score Gauge */}
-        <div className="flex items-center gap-4 bg-[#F1F7ED] border border-[#2F6F4E]/30 p-5 rounded-xl shrink-0 shadow-xs card-hover-effect">
+        <div className="flex items-center gap-4 bg-[#F1F7ED] border border-[#2F6F4E]/30 p-5 rounded-md shrink-0 shadow-xs card-hover-effect">
           <div className="relative flex items-center justify-center">
             <div className="w-16 h-16 rounded-full border-4 border-[#E6EFE2] border-t-[#2F6F4E] border-r-[#88B04B] flex items-center justify-center">
               <span className="text-2xl font-black text-[#0F2F2A]">{MOCK_SEO_HEALTH.overallScore}</span>
@@ -95,7 +95,7 @@ export default function AdminSEOPage() {
 
       {/* Core Web Vitals Row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="bg-white p-5 rounded-xl border border-[#E6EFE2] shadow-xs card-hover-effect">
+        <div className="bg-white p-5 rounded-md border border-[#E6EFE2] shadow-xs card-hover-effect">
           <div className="flex items-center justify-between text-xs text-slate-500 font-bold uppercase tracking-wider">
             <span>Largest Contentful Paint</span>
             <Zap className="w-4 h-4 text-[#2F6F4E]" />
@@ -106,7 +106,7 @@ export default function AdminSEOPage() {
           <p className="text-[10px] text-slate-400 mt-1 font-medium">Target: &lt; 2.5s (Passing)</p>
         </div>
 
-        <div className="bg-white p-5 rounded-xl border border-[#E6EFE2] shadow-xs card-hover-effect">
+        <div className="bg-white p-5 rounded-md border border-[#E6EFE2] shadow-xs card-hover-effect">
           <div className="flex items-center justify-between text-xs text-slate-500 font-bold uppercase tracking-wider">
             <span>First Input Delay (FID)</span>
             <Zap className="w-4 h-4 text-[#2F6F4E]" />
@@ -117,7 +117,7 @@ export default function AdminSEOPage() {
           <p className="text-[10px] text-slate-400 mt-1 font-medium">Target: &lt; 100ms (Passing)</p>
         </div>
 
-        <div className="bg-white p-5 rounded-xl border border-[#E6EFE2] shadow-xs card-hover-effect">
+        <div className="bg-white p-5 rounded-md border border-[#E6EFE2] shadow-xs card-hover-effect">
           <div className="flex items-center justify-between text-xs text-slate-500 font-bold uppercase tracking-wider">
             <span>Cumulative Layout Shift</span>
             <Zap className="w-4 h-4 text-[#2F6F4E]" />
@@ -128,7 +128,7 @@ export default function AdminSEOPage() {
           <p className="text-[10px] text-slate-400 mt-1 font-medium">Target: &lt; 0.1 (Zero Shift)</p>
         </div>
 
-        <div className="bg-white p-5 rounded-xl border border-[#E6EFE2] shadow-xs card-hover-effect">
+        <div className="bg-white p-5 rounded-md border border-[#E6EFE2] shadow-xs card-hover-effect">
           <div className="flex items-center justify-between text-xs text-slate-500 font-bold uppercase tracking-wider">
             <span>Interaction to Next Paint</span>
             <Zap className="w-4 h-4 text-[#2F6F4E]" />
@@ -144,7 +144,7 @@ export default function AdminSEOPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Side: SERP & Social Card Simulator (7 cols) */}
         <div className="lg:col-span-7 space-y-6">
-          <div className="bg-white p-6 rounded-xl border border-[#E6EFE2] space-y-5 shadow-xs">
+          <div className="bg-white p-6 rounded-md border border-[#E6EFE2] space-y-5 shadow-xs">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Globe className="w-4 h-4 text-[#2F6F4E]" />
@@ -156,14 +156,14 @@ export default function AdminSEOPage() {
                 <select
                   value={selectedProduct.id}
                   onChange={(e) => handleProductChange(e.target.value)}
-                  className="bg-[#FAFCF9] border border-[#E6EFE2] text-[#0F2F2A] text-xs font-bold rounded-xl px-3 py-1.5 focus:outline-none focus:border-[#2F6F4E] cursor-pointer"
+                  className="bg-[#FAFCF9] border border-[#E6EFE2] text-[#0F2F2A] text-xs font-bold rounded-md px-3 py-1.5 focus:outline-none focus:border-[#2F6F4E] cursor-pointer"
                 >
                   {MOCK_PRODUCTS.map(p => (
                     <option key={p.id} value={p.id}>{p.name.slice(0, 32)}...</option>
                   ))}
                 </select>
 
-                <div className="flex bg-[#F1F7ED] rounded-xl p-1 border border-[#E6EFE2]">
+                <div className="flex bg-[#F1F7ED] rounded-md p-1 border border-[#E6EFE2]">
                   <button
                     onClick={() => setPreviewDevice("desktop")}
                     className={`p-1.5 rounded-lg transition ${previewDevice === "desktop" ? "bg-[#2F6F4E] text-white shadow-xs" : "text-slate-500 hover:text-[#0F2F2A]"}`}
@@ -244,7 +244,7 @@ export default function AdminSEOPage() {
                   type="text"
                   value={customTitle}
                   onChange={(e) => setCustomTitle(e.target.value)}
-                  className="w-full bg-white border border-[#E6EFE2] rounded-xl px-3.5 py-2.5 text-[#0F2F2A] focus:outline-none focus:border-[#2F6F4E]"
+                  className="w-full bg-white border border-[#E6EFE2] rounded-md px-3.5 py-2.5 text-[#0F2F2A] focus:outline-none focus:border-[#2F6F4E]"
                 />
               </div>
 
@@ -259,7 +259,7 @@ export default function AdminSEOPage() {
                   rows={2}
                   value={customDesc}
                   onChange={(e) => setCustomDesc(e.target.value)}
-                  className="w-full bg-white border border-[#E6EFE2] rounded-xl px-3.5 py-2.5 text-[#0F2F2A] focus:outline-none focus:border-[#2F6F4E] resize-none"
+                  className="w-full bg-white border border-[#E6EFE2] rounded-md px-3.5 py-2.5 text-[#0F2F2A] focus:outline-none focus:border-[#2F6F4E] resize-none"
                 />
               </div>
 
@@ -270,7 +270,7 @@ export default function AdminSEOPage() {
                   value={customKeyword}
                   onChange={(e) => setCustomKeyword(e.target.value)}
                   placeholder="e.g. Ultra 2 Titanium Smartwatch Bangladesh"
-                  className="w-full bg-white border border-[#E6EFE2] rounded-xl px-3.5 py-2.5 text-[#0F2F2A] focus:outline-none focus:border-[#2F6F4E]"
+                  className="w-full bg-white border border-[#E6EFE2] rounded-md px-3.5 py-2.5 text-[#0F2F2A] focus:outline-none focus:border-[#2F6F4E]"
                 />
               </div>
             </div>
@@ -307,7 +307,7 @@ export default function AdminSEOPage() {
         {/* Right Side: Schema.org Inspector & Audit Checklist (5 cols) */}
         <div className="lg:col-span-5 space-y-6">
           {/* Schema.org Structured Data Tab */}
-          <div className="bg-white p-6 rounded-xl border border-[#E6EFE2] space-y-4 shadow-xs">
+          <div className="bg-white p-6 rounded-md border border-[#E6EFE2] space-y-4 shadow-xs">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <FileCode2 className="w-4 h-4 text-[#2F6F4E]" />
@@ -315,7 +315,7 @@ export default function AdminSEOPage() {
               </div>
               <button
                 onClick={copySchemaToClipboard}
-                className="flex items-center gap-1.5 text-[11px] bg-[#F1F7ED] hover:bg-[#E6EFE2] text-[#0F2F2A] font-bold px-3 py-1.5 rounded-xl border border-[#2F6F4E]/20 transition btn-press-effect"
+                className="flex items-center gap-1.5 text-[11px] bg-[#F1F7ED] hover:bg-[#E6EFE2] text-[#0F2F2A] font-bold px-3 py-1.5 rounded-md border border-[#2F6F4E]/20 transition btn-press-effect"
               >
                 {copied ? <Check className="w-3.5 h-3.5 text-[#2F6F4E]" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copied ? "Copied!" : "Copy Schema"}</span>
@@ -325,19 +325,19 @@ export default function AdminSEOPage() {
             <div className="flex gap-1.5 p-1 bg-[#F1F7ED] rounded-lg border border-[#E6EFE2] text-xs">
               <button
                 onClick={() => setActiveSchemaTab("product")}
-                className={`flex-1 py-2 rounded-xl font-bold transition ${activeSchemaTab === "product" ? "bg-[#2F6F4E] text-white shadow-xs" : "text-slate-600 hover:text-[#0F2F2A]"}`}
+                className={`flex-1 py-2 rounded-md font-bold transition ${activeSchemaTab === "product" ? "bg-[#2F6F4E] text-white shadow-xs" : "text-slate-600 hover:text-[#0F2F2A]"}`}
               >
                 Product
               </button>
               <button
                 onClick={() => setActiveSchemaTab("org")}
-                className={`flex-1 py-2 rounded-xl font-bold transition ${activeSchemaTab === "org" ? "bg-[#2F6F4E] text-white shadow-xs" : "text-slate-600 hover:text-[#0F2F2A]"}`}
+                className={`flex-1 py-2 rounded-md font-bold transition ${activeSchemaTab === "org" ? "bg-[#2F6F4E] text-white shadow-xs" : "text-slate-600 hover:text-[#0F2F2A]"}`}
               >
                 Organization
               </button>
               <button
                 onClick={() => setActiveSchemaTab("breadcrumb")}
-                className={`flex-1 py-2 rounded-xl font-bold transition ${activeSchemaTab === "breadcrumb" ? "bg-[#2F6F4E] text-white shadow-xs" : "text-slate-600 hover:text-[#0F2F2A]"}`}
+                className={`flex-1 py-2 rounded-md font-bold transition ${activeSchemaTab === "breadcrumb" ? "bg-[#2F6F4E] text-white shadow-xs" : "text-slate-600 hover:text-[#0F2F2A]"}`}
               >
                 Breadcrumbs
               </button>
@@ -354,7 +354,7 @@ export default function AdminSEOPage() {
           </div>
 
           {/* Detailed Audit Checklist */}
-          <div className="bg-white p-6 rounded-xl border border-[#E6EFE2] space-y-4 shadow-xs">
+          <div className="bg-white p-6 rounded-md border border-[#E6EFE2] space-y-4 shadow-xs">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-[#2F6F4E]" />
@@ -396,7 +396,7 @@ export default function AdminSEOPage() {
       </div>
 
       {/* Bangladesh High-Intent Keyword Rank Tracker */}
-      <div className="bg-white p-6 rounded-xl border border-[#E6EFE2] shadow-xs">
+      <div className="bg-white p-6 rounded-md border border-[#E6EFE2] shadow-xs">
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-2">
             <TrendingUp className="w-4 h-4 text-[#2F6F4E]" />

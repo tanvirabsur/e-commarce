@@ -72,7 +72,7 @@ export default function AdminModerationPage() {
       {/* Grid: Product List & Review Inspector */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         {/* Left List: Products Table (5 cols) */}
-        <div className="lg:col-span-5 bg-white p-5 rounded-xl border border-[#E6EFE2] space-y-3 shadow-xs">
+        <div className="lg:col-span-5 bg-white p-5 rounded-md border border-[#E6EFE2] space-y-3 shadow-xs">
           <div className="flex items-center justify-between pb-2 border-b border-[#E6EFE2]">
             <h2 className="font-bold text-[#0F2F2A] text-xs uppercase tracking-wider">Submission Queue</h2>
             <span className="text-[11px] font-mono text-slate-400">Select to inspect</span>
@@ -111,7 +111,7 @@ export default function AdminModerationPage() {
         </div>
 
         {/* Right Preview Inspector (7 cols) */}
-        <div className="lg:col-span-7 bg-white p-6 rounded-xl border border-[#E6EFE2] space-y-5 shadow-xs">
+        <div className="lg:col-span-7 bg-white p-6 rounded-md border border-[#E6EFE2] space-y-5 shadow-xs">
           <div className="flex items-start justify-between gap-4 pb-4 border-b border-[#E6EFE2]">
             <div>
               <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
@@ -212,7 +212,7 @@ export default function AdminModerationPage() {
       {/* Reject Modal */}
       {rejectionModalOpen && (
         <div className="fixed inset-0 bg-[#0F2F2A]/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-          <div className="bg-white border border-[#E6EFE2] p-6 rounded-xl max-w-md w-full space-y-4 shadow-xl">
+          <div className="bg-white border border-[#E6EFE2] p-6 rounded-md max-w-md w-full space-y-4 shadow-xl">
             <div className="flex items-center gap-2 text-red-600 font-bold text-base">
               <AlertTriangle className="w-5 h-5" />
               <span>Select Rejection Reason</span>
